@@ -10,19 +10,19 @@ interface Category {
 
 export default function CategoryHome() {
   const categorys: Category[] = [
-    { id: 1, name: "Culture", image: "cannard.webp" },
-    { id: 2, name: "Santé physique", image: "cat.jpg" },
-    { id: 3, name: "Santé mental", image: "dog.webp" },
-    { id: 4, name: "Category 4", image: "italy.jpeg" },
-    { id: 5, name: "Category 5", image: "pexels-photo.jpeg" },
-    { id: 6, name: "Category 6", image: "pexels.jpeg" },
-    { id: 7, name: "Category 7", image: "dog.webp" },
-    { id: 8, name: "Category 8", image: "pexels-photo.jpeg" },
-    { id: 9, name: "Category 9", image: "cat.jpg" },
-    { id: 10, name: "Category 10", image: "italy.jpeg" },
-    { id: 11, name: "Category 11", image: "pexels-photo.jpeg" },
-    { id: 12, name: "Category 12", image: "cat.jpg" },
-    { id: 13, name: "Category 13", image: "dog.webp" }
+    { id: 1, name: "Culture", image: require('../../../public/img/cannard.webp/') },
+    { id: 2, name: "Santé physique", image: require('../../../public/img/cat.jpg/') },
+    { id: 3, name: "Santé mentale", image: require('../../../public/img/dog.webp/') },
+    { id: 4, name: "Category 4", image: require('../../../public/img/italy.jpeg/') },
+    { id: 5, name: "Category 5", image: require('../../../public/img/pexels-photo.jpeg/') },
+    { id: 6, name: "Category 6", image: require('../../../public/img/pexels.jpeg/') },
+    { id: 7, name: "Category 7", image: require('../../../public/img/cannard.webp/') },
+    { id: 8, name: "Category 8", image: require('../../../public/img/cannard.webp/') },
+    { id: 9, name: "Category 9", image: require('../../../public/img/italy.jpeg/') },
+    { id: 10, name: "Category 10", image: require('../../../public/img/italy.jpeg/') },
+    { id: 11, name: "Category 11", image: require('../../../public/img/italy.jpeg/') },
+    { id: 12, name: "Category 12", image: require('../../../public/img/italy.jpeg/') },
+    { id: 13, name: "Category 13", image: require('../../../public/img/italy.jpeg/') },
   ];
 
   const screenWidth = Dimensions.get('window').width;
@@ -34,7 +34,9 @@ export default function CategoryHome() {
         source={item.image}
         style={styles.image}
       />
-      <Text style={styles.text}>{item.name}</Text>
+      <View style={styles.textContainer}>
+        <Text style={styles.text}>{item.name}</Text>
+      </View>
     </TouchableOpacity>
   );
 

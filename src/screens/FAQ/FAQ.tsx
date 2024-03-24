@@ -1,14 +1,15 @@
 import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { styles } from './style';
-import CategoryHome from '../../components/CategoryHome/CategoryHome';
-import QuoiDeNeuf from '../../components/QuoiDeNeuf/QuoiDeNeuf';
+import Question from '../../components/Question/Question';
 
 const Home = () => {
   return (
     <ScrollView style={styles.container}>
-      <QuoiDeNeuf/>
-      <CategoryHome />
+      <Text style={styles.title}>
+        Foire aux questions
+      </Text>
+      <Question/>
     </ScrollView>
   );
 };
