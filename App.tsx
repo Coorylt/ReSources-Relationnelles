@@ -23,12 +23,13 @@ interface CustomDrawerContentProps {
 
 const drawerItems: DrawerItem[] = [
   { name: "Accueil", icon: <MaterialIcons name="home" size={34} color="white" />, screen: Home },
+  { name: "Mon Compte", icon: <MaterialCommunityIcons name="account" size={34} color="white" />, screen: Login },
+  { name: "Message", icon: <MaterialCommunityIcons name="message-outline" size={34} color="white" />, screen: Login },
   { name: "Recherche", icon: <MaterialIcons name="search" size={34} color="white" />, screen: Home },
   { name: "Nouvelles ressources", icon: <MaterialIcons name="add" size={34} color="white" />, screen: Home },
   { name: "Catégories", icon: <MaterialCommunityIcons name="format-list-bulleted" size={34} color="white" />, screen: Home },
   { name: "À propos", icon: <MaterialCommunityIcons name="information-outline" size={34} color="white" />, screen: Home },
   { name: "FAQ", icon: <Ionicons name="help-circle-outline" size={34} color="white" />, screen: FAQ },
-  { name: "Mon Compte", icon: <MaterialCommunityIcons name="account" size={34} color="white" />, screen: Login },
 ];
 
 function CustomDrawerContent({ navigation }: CustomDrawerContentProps) {
