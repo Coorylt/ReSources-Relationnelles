@@ -8,6 +8,7 @@ import { MaterialIcons, MaterialCommunityIcons, Ionicons } from '@expo/vector-ic
 import Home from './src/screens/Home/Home';
 import FAQ from './src/screens/FAQ/FAQ';
 import Login from './src/screens/Login/Login';
+import Profile from './src/screens/Profile/Profile';
 
 const Drawer = createDrawerNavigator();
 
@@ -23,7 +24,7 @@ interface CustomDrawerContentProps {
 
 const drawerItems: DrawerItem[] = [
   { name: "Accueil", icon: <MaterialIcons name="home" size={34} color="white" />, screen: Home },
-  { name: "Mon Compte", icon: <MaterialCommunityIcons name="account" size={34} color="white" />, screen: Login },
+  { name: "Mon Compte", icon: <MaterialCommunityIcons name="account" size={34} color="white" />, screen: Profile},
   { name: "Message", icon: <MaterialCommunityIcons name="message-outline" size={34} color="white" />, screen: Login },
   { name: "Recherche", icon: <MaterialIcons name="search" size={34} color="white" />, screen: Home },
   { name: "Nouvelles ressources", icon: <MaterialIcons name="add" size={34} color="white" />, screen: Home },
