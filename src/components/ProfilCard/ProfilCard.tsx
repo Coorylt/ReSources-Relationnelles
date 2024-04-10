@@ -15,12 +15,13 @@ export default function ProfilCard() {
                     <Text style={styles.pseudo}>John Doe</Text>
                     <Text style={styles.stats}>2 ressources - 85 likes </Text>
                     <TouchableOpacity style={styles.button}>
-                    <Text style={styles.button}>Modifier mon profil</Text>
+                        <Text style={styles.button}>Modifier mon profil</Text>
                     </TouchableOpacity>
                 </View>
                 <View>
                     <Text>Mes ressources </Text>
-                    <Text>Mes Likes</Text>
+                    <Text>Mes Likes
+                    </Text>
                 </View>
             </View>
         </View>
