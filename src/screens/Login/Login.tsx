@@ -6,7 +6,7 @@ import Login from '../../components/Login/Login';
 
 const Home = () => {
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView>
       <Login/>
     </ScrollView>
   );
