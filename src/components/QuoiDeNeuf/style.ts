@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     },
     image: {
         width: '100%',
-        height: '80%',
+        height: '70%',
         resizeMode: 'cover',
     },
     textContainer: {
@@ -21,12 +21,12 @@ export const styles = StyleSheet.create({
         padding:15,
         backgroundColor: "#03989E",
         width: 278,
-        height: '100%',
         paddingHorizontal: 50,
         fontWeight: 'bold',
         fontStyle: 'italic',
         flexWrap: 'wrap',
         textAlignVertical: 'center',
+
     },
     title: {
         marginTop: 25,
@@ -35,11 +35,12 @@ export const styles = StyleSheet.create({
         fontSize: 48,
         color: '#F7A932',
         fontWeight: '700',
-        fontStyle: 'italic'
+        fontStyle: 'italic',
     },
     RessourceContainer: {
         borderRadius: 40,
         overflow: 'hidden',
         marginHorizontal: 55,
+        
     },
 });
