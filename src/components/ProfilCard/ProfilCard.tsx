@@ -20,8 +20,7 @@ export default function ProfilCard() {
                 </View>
                 <View>
                     <Text>Mes ressources </Text>
-                    <Text>Mes Likes
-                    </Text>
+                    <Text>Mes Likes</Text>
                 </View>
             </View>
         </View>
