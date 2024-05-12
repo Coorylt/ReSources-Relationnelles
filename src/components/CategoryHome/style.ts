@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
 
   image: {
     width: '100%',
-    height: '55%',
+    height: 110,
     resizeMode: 'cover',
   },
 
@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
     paddingTop: 5,
     color: 'white',
     backgroundColor: "#03989E",
-    width: 191,
+    width: 210,
     height: 30,
     paddingHorizontal: 50,
     fontWeight: 'bold',
@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
     fontSize: 48,
     color: '#F7A932',
     fontWeight: '700',
-    fontStyle: 'italic'
+    fontStyle: 'italic',
   },
   categoryContainer: {
     borderRadius: 20,

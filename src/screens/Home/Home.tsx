@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <ScrollView style={styles.container}>
       <QuoiDeNeuf/>
-      <CategoryHome />
+      <CategoryHome/>
     </ScrollView>
   );
 };
