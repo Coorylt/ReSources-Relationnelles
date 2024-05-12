@@ -9,6 +9,7 @@ import Home from './src/screens/Home/Home';
 import FAQ from './src/screens/FAQ/FAQ';
 import Login from './src/screens/Login/Login';
 import Profile from './src/screens/Profile/Profile';
+import Category from './src/screens/Category/Category';
 
 const Drawer = createDrawerNavigator();
 
@@ -28,7 +29,7 @@ const drawerItems: DrawerItem[] = [
   { name: "Message", icon: <MaterialCommunityIcons name="message-outline" size={34} color="white" />, screen: Login },
   { name: "Recherche", icon: <MaterialIcons name="search" size={34} color="white" />, screen: Home },
   { name: "Nouvelles ressources", icon: <MaterialIcons name="add" size={34} color="white" />, screen: Home },
-  { name: "Catégories", icon: <MaterialCommunityIcons name="format-list-bulleted" size={34} color="white" />, screen: Home },
+  { name: "Catégories", icon: <MaterialCommunityIcons name="format-list-bulleted" size={34} color="white" />, screen: Category },
   { name: "À propos", icon: <MaterialCommunityIcons name="information-outline" size={34} color="white" />, screen: Home },
   { name: "FAQ", icon: <Ionicons name="help-circle-outline" size={34} color="white" />, screen: FAQ },
 ];

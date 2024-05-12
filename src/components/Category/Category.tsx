@@ -1,15 +1,15 @@
-import React, { useRef, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, FlatList, Dimensions } from 'react-native';
+import React, { useRef, } from 'react';
+import { View, Text, Image, TouchableOpacity, FlatList, } from 'react-native';
 import { styles } from './style';
 
 interface Category {
   id: number;
   name: string;
-  image: any; 
+  image: any;
   color: string;
 }
 
-export default function CategoryHome() {
+export default function Category() {
   const categorys: Category[] = [
     { id: 1, name: "Culture", image: require('../../../public/img/cannard.webp/'), color: '#03989E' },
     { id: 2, name: "Santé physique", image: require('../../../public/img/cat.jpg/'),color: '#F7A932' },
@@ -26,19 +26,28 @@ export default function CategoryHome() {
     { id: 13, name: "Category 13", image: require('../../../public/img/italy.jpeg/'), color: 'red' },
   ];
 
-  const screenWidth = Dimensions.get('window').width;
-  const flatListRef = useRef<FlatList<Category> | null>(null);
+  // Diviser les catégories en groupes de deux
+  const groupedCategories: Category[][] = [];
+  for (let i = 0; i < categorys.length; i += 2) {
+    groupedCategories.push(categorys.slice(i, i + 2));
+  }
 
-  const renderItem = ({ item }: { item: Category }) => (
-    <TouchableOpacity style={[styles.categoryContainer, { backgroundColor: item.color }]} onPress={() => console.log(item.name)}>
-      <Image
-        source={item.image}
-        style={styles.image}
-      />
-      <View style={styles.textContainer}>
-        <Text style={styles.text}>{item.name}</Text>
-      </View>
-    </TouchableOpacity>
+  const flatListRef = useRef<FlatList<Category[]> | null>(null);
+
+  const renderRow = ({ item }: { item: Category[] }) => (
+    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 15 }}>
+      {item.map(category => (
+        <TouchableOpacity key={category.id} style={[styles.categoryContainer, { backgroundColor: category.color }]} onPress={() => console.log(category.name)}>
+          <Image
+            source={category.image}
+            style={styles.image}
+          />
+          <View style={styles.textContainer}>
+            <Text style={styles.text}>{category.name}</Text>
+          </View>
+        </TouchableOpacity>
+      ))}
+    </View>
   );
 
   return (
@@ -46,15 +55,10 @@ export default function CategoryHome() {
       <Text style={styles.title}>Catégories</Text>
       <FlatList
         ref={flatListRef}
-        horizontal
-        data={categorys}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-        pagingEnabled
-        snapToAlignment={'start'}
-        decelerationRate={'fast'}
-        snapToInterval={screenWidth}
-        showsHorizontalScrollIndicator={false}
+        data={groupedCategories}
+        renderItem={renderRow}
+        keyExtractor={(item, index) => index.toString()}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
