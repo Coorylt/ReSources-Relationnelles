@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList, Dimensions } from 'react-native';
 import { styles } from './style';
+import { useTranslation } from 'react-i18next';
 
 interface Ressource {
   id: number;
@@ -9,6 +10,9 @@ interface Ressource {
 }
 
 export default function QuoiDeNeuf() {
+ 
+  const {t} = useTranslation();
+  
   const Ressources: Ressource[] = [
     { id: 1, name: "Le bien être au travail", image: require('../../../public/img/cannard.webp/') },
     { id: 2, name: "Le bien être au travail", image: require('../../../public/img/cat.jpg/') },
@@ -32,7 +36,7 @@ export default function QuoiDeNeuf() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Quoi de neuf ?</Text>
+      <Text style={styles.title}>{t('whats_up')}</Text>
       <FlatList
         ref={flatListRef}
         horizontal

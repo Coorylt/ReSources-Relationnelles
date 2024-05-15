@@ -9,7 +9,7 @@ interface Category {
   color: string;
 }
 
-export default function Category() {
+export default function CategoryPage() {
   const categorys: Category[] = [
     { id: 1, name: "Culture", image: require('../../../public/img/cannard.webp/'), color: '#03989E' },
     { id: 2, name: "Santé physique", image: require('../../../public/img/cat.jpg/'),color: '#F7A932' },
@@ -26,7 +26,6 @@ export default function Category() {
     { id: 13, name: "Category 13", image: require('../../../public/img/italy.jpeg/'), color: 'red' },
   ];
 
-  // Diviser les catégories en groupes de deux
   const groupedCategories: Category[][] = [];
   for (let i = 0; i < categorys.length; i += 2) {
     groupedCategories.push(categorys.slice(i, i + 2));
