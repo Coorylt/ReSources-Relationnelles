@@ -2,13 +2,12 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 10,
     borderRadius: 50,
   },
 
   image: {
-    width: '100%',
-    height: 110,
+    width: 180,
+    height: 90,
     resizeMode: 'cover',
   },
 
@@ -22,9 +21,8 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: 5,
     color: 'white',
-    width: 210,
+    width: 180,
     height: 30,
-    paddingHorizontal: 50,
     fontWeight: 'bold',
   },
   title: {
@@ -38,6 +36,6 @@ export const styles = StyleSheet.create({
   categoryContainer: {
     borderRadius: 20,
     overflow: 'hidden',
-    marginHorizontal: 15,
+    marginHorizontal:8,
   },
 });

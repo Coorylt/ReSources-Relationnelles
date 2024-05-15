@@ -1,14 +1,12 @@
 import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { styles } from './style';
-import CategoryHome from '../../components/CategoryHome/CategoryHome';
-import QuoiDeNeuf from '../../components/QuoiDeNeuf/QuoiDeNeuf';
+import Category from '../../components/Category/CategoryPage';
 
 const Home = () => {
   return (
     <ScrollView style={styles.container}>
-      <QuoiDeNeuf/>
-      <CategoryHome/>
+        <Category/>
     </ScrollView>
   );
 };

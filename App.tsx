@@ -9,7 +9,8 @@ import Home from './src/screens/Home/Home';
 import FAQ from './src/screens/FAQ/FAQ';
 import Login from './src/screens/Login/Login';
 import Profile from './src/screens/Profile/Profile';
-
+import Category from './src/screens/Category/Category';
+import './src/i18n/i18n.config'
 const Drawer = createDrawerNavigator();
 
 interface DrawerItem {
@@ -23,14 +24,14 @@ interface CustomDrawerContentProps {
 }
 
 const drawerItems: DrawerItem[] = [
-  { name: "Accueil", icon: <MaterialIcons name="home" size={34} color="white" />, screen: Home },
-  { name: "Mon Compte", icon: <MaterialCommunityIcons name="account" size={34} color="white" />, screen: Profile},
-  { name: "Message", icon: <MaterialCommunityIcons name="message-outline" size={34} color="white" />, screen: Login },
-  { name: "Recherche", icon: <MaterialIcons name="search" size={34} color="white" />, screen: Home },
-  { name: "Nouvelles ressources", icon: <MaterialIcons name="add" size={34} color="white" />, screen: Home },
-  { name: "Catégories", icon: <MaterialCommunityIcons name="format-list-bulleted" size={34} color="white" />, screen: Home },
-  { name: "À propos", icon: <MaterialCommunityIcons name="information-outline" size={34} color="white" />, screen: Home },
-  { name: "FAQ", icon: <Ionicons name="help-circle-outline" size={34} color="white" />, screen: FAQ },
+  { name: "home", icon: <MaterialIcons name="home" size={34} color="white" />, screen: Home },
+  { name: "my_account", icon: <MaterialCommunityIcons name="account" size={34} color="white" />, screen: Profile},
+  { name: "message", icon: <MaterialCommunityIcons name="message-outline" size={34} color="white" />, screen: Login },
+  { name: "search", icon: <MaterialIcons name="search" size={34} color="white" />, screen: Home },
+  { name: "new_resources", icon: <MaterialIcons name="add" size={34} color="white" />, screen: Home },
+  { name: "Categories", icon: <MaterialCommunityIcons name="format-list-bulleted" size={34} color="white" />, screen: Category },
+  { name: "about", icon: <MaterialCommunityIcons name="information-outline" size={34} color="white" />, screen: Home },
+  { name: "faq", icon: <Ionicons name="help-circle-outline" size={34} color="white" />, screen: FAQ },
 ];
 
 function CustomDrawerContent({ navigation }: CustomDrawerContentProps) {
