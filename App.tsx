@@ -11,6 +11,7 @@ import Login from './src/screens/Login/Login';
 import Profile from './src/screens/Profile/Profile';
 import Category from './src/screens/Category/Category';
 import './src/i18n/i18n.config'
+import About from './src/screens/About/About';
 const Drawer = createDrawerNavigator();
 
 interface DrawerItem {
@@ -30,7 +31,7 @@ const drawerItems: DrawerItem[] = [
   { name: "search", icon: <MaterialIcons name="search" size={34} color="white" />, screen: Home },
   { name: "new_resources", icon: <MaterialIcons name="add" size={34} color="white" />, screen: Home },
   { name: "Categories", icon: <MaterialCommunityIcons name="format-list-bulleted" size={34} color="white" />, screen: Category },
-  { name: "about", icon: <MaterialCommunityIcons name="information-outline" size={34} color="white" />, screen: Home },
+  { name: "about", icon: <MaterialCommunityIcons name="information-outline" size={34} color="white" />, screen: About },
   { name: "faq", icon: <Ionicons name="help-circle-outline" size={34} color="white" />, screen: FAQ },
 ];
 
