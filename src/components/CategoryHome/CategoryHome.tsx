@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList, Dimensions } from 'react-native';
 import { styles } from './style';
+import { useTranslation } from 'react-i18next';
 
 interface Category {
   id: number;
@@ -10,6 +11,10 @@ interface Category {
 }
 
 export default function CategoryHome() {
+
+  const {t} = useTranslation();
+
+
   const categorys: Category[] = [
     { id: 1, name: "Culture", image: require('../../../public/img/cannard.webp/'), color: '#03989E' },
     { id: 2, name: "Santé physique", image: require('../../../public/img/cat.jpg/'),color: '#F7A932' },
@@ -43,7 +48,7 @@ export default function CategoryHome() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Catégories</Text>
+      <Text style={styles.title}>{t('categories')}</Text>
       <FlatList
         ref={flatListRef}
         horizontal

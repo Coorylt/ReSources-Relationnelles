@@ -8,6 +8,17 @@
         "new_resources": "Nouvelles Ressources",
         "categories": "Catégories",
         "about": "À propos",
-        "faq": "FAQ"
+        "faq": "FAQ",
+        "frequently_asked_questions":"Foire aux questions",
+        "email":"Mon email",
+        "password":"Mot de passe",
+        "confirm_password":"Confirmer le Mot de passe",
+        "my_name":"Mon Nom",
+        "my_firstName":"Mon prénom",
+        "signin":"S'inscrire",
+        "create_account":"Créer un compte",
+        "edit_profil":"Modifier mon profil",
+        "my_likes":"Mes Likes",
+        "my_ressources":"Mes Ressources"
     }
 }
