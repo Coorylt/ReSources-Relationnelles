@@ -3,12 +3,23 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { styles } from './style';
 import Article from '../Article/Article';
 import { useTranslation } from 'react-i18next';
+import RessourcePresentation from '../RessourcePresentation/RessourcePresentation'; // Importer le composant RessourcePresentation
 
 export default function ProfilCard() {
-    // Créez un état pour suivre la sélection de l'utilisateur
-    const [selectedOption, setSelectedOption] = useState('');
+    const resourceData = {
+        id: 1,
+        title: "Resource Title",
+        category: {
+          id: 1,
+          title: "Category Title"
+        },
+        likes: [],
+        createdAt: "2024-05-25T12:00:00Z",
+        viewsCount: 100
+        
+      };
+        const [selectedOption, setSelectedOption] = useState('');
     const { t } = useTranslation();
-
 
     return (
         <View>
@@ -53,7 +64,7 @@ export default function ProfilCard() {
                 </View>
 
                 <View>
-                    {/* <Article/> */}
+                    {selectedOption === 'resources' && <RessourcePresentation ressource={resourceData}  />} 
                 </View>
             </View>
         </View>
