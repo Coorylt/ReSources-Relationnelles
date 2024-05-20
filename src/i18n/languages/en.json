@@ -1,6 +1,6 @@
 {
     "translation": {
-        "whats_up":"What's Up ?",
+        "whats_up": "What's Up ?",
         "home": "Home",
         "my_account": "My Account",
         "message": "Message",
@@ -8,6 +8,19 @@
         "new_resources": "New Resources",
         "categories": "Categories",
         "about": "About",
-        "faq": "FAQ"
+        "faq": "FAQ",
+        "frequently_asked_questions": "Frequently asked questions",
+        "email":"My email",
+        "password": "Password",
+        "confirm_password": "Confirm your password",
+        "my_name":"My Last Name",
+        "my_firstName":"My First Name",
+        "signin":"Sign In",
+        "create_account":"Create an account",
+        "edit_profil":"Edit your profil",
+        "my_ressources":"My Ressources",
+        "my_likes":"My Likes"
+
+
     }
 }

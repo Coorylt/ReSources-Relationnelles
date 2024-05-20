@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { styles } from './style';
 import Article from '../Article/Article';
+import { useTranslation } from 'react-i18next';
 
 export default function ProfilCard() {
     // Créez un état pour suivre la sélection de l'utilisateur
     const [selectedOption, setSelectedOption] = useState('');
+    const { t } = useTranslation();
+
 
     return (
         <View>
@@ -19,7 +22,7 @@ export default function ProfilCard() {
                     <Text style={styles.pseudo}>John Doe</Text>
                     <Text style={styles.stats}>2 ressources - 85 likes</Text>
                     <TouchableOpacity>
-                        <Text style={styles.button}>Modifier mon profil</Text>
+                        <Text style={styles.button}>{t('edit_profil')}</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -31,7 +34,7 @@ export default function ProfilCard() {
                                 selectedOption === 'resources' && styles.underlined,
                             ]}
                         >
-                            Mes ressources
+                            {t('my_ressources')}
                         </Text>
                     </TouchableOpacity>
 
@@ -44,7 +47,7 @@ export default function ProfilCard() {
                                 selectedOption === 'likes' && styles.underlined,
                             ]}
                         >
-                            Mes Likes
+                            {t('my_likes')}
                         </Text>
                     </TouchableOpacity>
                 </View>

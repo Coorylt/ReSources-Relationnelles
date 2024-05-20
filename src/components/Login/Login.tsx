@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Alert, Text } from 'react-native';
 import { styles } from './style';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useTranslation } from 'react-i18next';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -9,6 +10,8 @@ const Login = () => {
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const { t } = useTranslation();
+
 
   const handleCreateAccount = () => {
     if (!email || !firstName || !lastName || !password || !confirmPassword) {
@@ -30,9 +33,9 @@ const Login = () => {
 
   return (
     <View style={[styles.container, styles.formContainer]}>
-      <Text style={styles.title}>S'inscrire </Text>
+      <Text style={styles.title}>{t('signin')} </Text>
       <View style={styles.text}>
-        <Text>Mon Email</Text>
+        <Text>{t('email')}</Text>
       </View>
       <TextInput
         style={styles.input}
@@ -41,7 +44,7 @@ const Login = () => {
         onChangeText={setEmail}
       />
       <View style={styles.text}>
-        <Text>Mon Nom</Text>
+        <Text>{t('my_name')}</Text>
       </View>
       <TextInput
         style={styles.input}
@@ -50,7 +53,7 @@ const Login = () => {
         onChangeText={setLastName}
       />
       <View style={styles.text}>
-        <Text>Mon Prénom</Text>
+        <Text>{t('my_firstName')}</Text>
       </View>
       <TextInput
         style={styles.input}
@@ -59,21 +62,21 @@ const Login = () => {
         onChangeText={setFirstName}
       />
       <View style={styles.text}>
-        <Text>Mot de passe</Text>
+        <Text>{t('password')}</Text>
       </View>
       <TextInput
         style={styles.input}
-        placeholder="Mot de passe"
+        placeholder={t('password')}
         secureTextEntry
         value={password}
         onChangeText={setPassword}
       />
       <View style={styles.text}>
-        <Text>Confirmer le mot de passe</Text>
+        <Text>{t('confirm_password')}</Text>
       </View>
       <TextInput
         style={styles.input}
-        placeholder="Confirmer le mot de passe"
+        placeholder={t('confirm_password')}
         secureTextEntry
         value={confirmPassword}
         onChangeText={setConfirmPassword}
@@ -82,7 +85,7 @@ const Login = () => {
         style={styles.button}
         onPress={handleCreateAccount}
       >
-        <Text style={styles.textButton}>Créer un compte</Text>
+        <Text style={styles.textButton}>{t('create_account')}</Text>
       </TouchableOpacity>
     </View>
   );

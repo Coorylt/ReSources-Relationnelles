@@ -29,8 +29,10 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
   },
   answer: {
-    marginLeft:15,
+    marginLeft:25,
+    justifyContent:'flex-start',
     marginBottom:20,
+    marginRight:25,
     fontSize: 16,
     color: '#005A5E',
   },  
