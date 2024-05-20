@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
 import { styles } from './style';
 import Article from '../Article/Article';
 import { useTranslation } from 'react-i18next';
-import RessourcePresentation from '../RessourcePresentation/RessourcePresentation'; // Importer le composant RessourcePresentation
+import RessourcePresentation from '../RessourcePresentation/RessourcePresentation';
 
 export default function ProfilCard() {
     const resourceData = {
@@ -16,10 +16,22 @@ export default function ProfilCard() {
         likes: [],
         createdAt: "2024-05-25T12:00:00Z",
         viewsCount: 100
-        
-      };
-        const [selectedOption, setSelectedOption] = useState('');
+    };
+
     const { t } = useTranslation();
+
+    const [selectedOption, setSelectedOption] = useState('resources'); // Initialisation de selectedOption avec 'resources'
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [pseudo, setPseudo] = useState('John Doe');
+
+    const handleEditProfile = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleSaveChanges = () => {
+        console.log("Sending updated profile data to backend:", pseudo);
+        setIsModalOpen(false);
+    };
 
     return (
         <View>
@@ -30,9 +42,9 @@ export default function ProfilCard() {
                         style={styles.profileImage}
                         resizeMode="contain"
                     />
-                    <Text style={styles.pseudo}>John Doe</Text>
+                    <Text style={styles.pseudo}>{pseudo}</Text>
                     <Text style={styles.stats}>2 ressources - 85 likes</Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={handleEditProfile}>
                         <Text style={styles.button}>{t('edit_profil')}</Text>
                     </TouchableOpacity>
                 </View>
@@ -64,9 +76,29 @@ export default function ProfilCard() {
                 </View>
 
                 <View>
-                    {selectedOption === 'resources' && <RessourcePresentation ressource={resourceData}  />} 
+                    {selectedOption === 'resources' && <RessourcePresentation ressource={resourceData} />}
                 </View>
             </View>
+
+            <Modal
+                visible={isModalOpen}
+                animationType="slide"
+                transparent={true}
+                onRequestClose={() => setIsModalOpen(false)}
+            >
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalContent}>
+                        <Text style={styles.modalTitle}>Modifier le profil</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Nouveau pseudo"
+                            value={pseudo}
+                            onChangeText={setPseudo}
+                        />
+                        <Button title="Enregistrer les modifications" onPress={handleSaveChanges} color="#03989E"/>
+                    </View>
+                </View>
+            </Modal>
         </View>
     );
 }

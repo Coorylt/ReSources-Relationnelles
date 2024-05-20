@@ -49,24 +49,60 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        bottom:'23%'
+        bottom: '23%'
     },
 
     centeredText: {
-        color: '#000', // La couleur du texte reste noire
+        color: '#000',
         fontWeight: 'bold',
         fontSize: 16,
     },
 
     divider: {
         marginHorizontal: 10,
-        color: 'black', // La couleur du texte reste noire
+        color: 'black',
         fontWeight: 'bold',
         fontSize: 16,
     },
 
     underlined: {
         textDecorationLine: 'underline',
-        color: '#03989E', // La couleur de l'underlined est bleue
+        color: '#03989E',
     },
+
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+
+
+    // Modal 
+
+    modalContent: {
+        backgroundColor: 'white',
+        padding: 20,
+        borderRadius: 10,
+        elevation: 5, // Ombre pour Android
+        shadowColor: '#000', // Ombre pour iOS
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+    },
+    modalTitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    input: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 5,
+        padding: 10,
+        marginBottom: 10,
+    },
+    modalButton: {
+        backgroundColor: '#03989E'
+    }
 });
