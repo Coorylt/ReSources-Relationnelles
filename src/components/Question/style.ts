@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     backgroundColor: '#EAE5E0',
+    paddingBottom:'20%'
   },
   questionContainer: {
 
