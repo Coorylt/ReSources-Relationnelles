@@ -1,55 +1,62 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
+    scrollContainer: {
+        flexGrow: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
     containerCard: {
+        marginTop:'10%',
         backgroundColor: 'white',
         width: '90%',
-        height: 450,
-        alignSelf: 'center',
+        padding: 20,
         borderRadius: 25,
-        top: 35,
+        alignItems: 'center',
+    },
+
+    profileContainer: {
+        alignItems: 'center',
+        marginBottom: 20,
     },
 
     profileImage: {
-        width: '35%',
-        left: '6%',
-        bottom: '15%',
+        width: 100, // Taille fixe pour l'image
+        height: 100,
+        borderRadius: 50, // Pour une image circulaire
+        marginBottom: 10,
     },
 
     pseudo: {
-        position: 'absolute',
         color: '#03989E',
         fontSize: 24,
         fontWeight: '700',
-        top: '18%',
-        left: '54%',
+        textAlign: 'center', // Centre le texte
     },
 
     stats: {
-        position: 'absolute',
         fontWeight: '700',
-        top: '30%',
-        left: '47%',
+        marginTop: 5,
+        textAlign: 'center', // Centre le texte
     },
 
     button: {
-        position: 'absolute',
         backgroundColor: '#03989E',
         borderRadius: 25,
-        bottom: 115,
-        left: '50%',
+        marginTop: 10,
         color: 'white',
         fontWeight: '700',
         fontSize: 12,
         padding: 10,
         textAlign: 'center',
+        width: 160, 
     },
 
     centeredTextContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        bottom: '23%'
     },
 
     centeredText: {
@@ -77,6 +84,11 @@ export const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
 
+    resources:{
+        width:'110%',
+        marginTop:15,
+    },
+
     // Modal 
     
     modalContent: {
@@ -88,11 +100,14 @@ export const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.3,
         shadowRadius: 2,
+        width: '80%', // Ajuste la largeur du modal
+        alignItems: 'center', // Centre le contenu du modal
     },
     modalTitle: {
         fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 10,
+        textAlign: 'center', // Centre le texte
     },
     input: {
         borderWidth: 1,
@@ -100,6 +115,8 @@ export const styles = StyleSheet.create({
         borderRadius: 5,
         padding: 10,
         marginBottom: 10,
+        width: '100%', // Prend toute la largeur disponible
+        textAlign: 'center', // Centre le texte
     },
     modalButton: {
         backgroundColor: '#03989E'
