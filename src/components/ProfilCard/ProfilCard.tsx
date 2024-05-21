@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Modal, TextInput, Button, ScrollView } from 'react-native';
 import { styles } from './style';
-import Article from '../Article/Article';
 import { useTranslation } from 'react-i18next';
 import RessourcePresentation from '../RessourcePresentation/RessourcePresentation';
 
@@ -22,7 +21,7 @@ export default function ProfilCard() {
 
     const [selectedOption, setSelectedOption] = useState('resources'); // Initialisation de selectedOption avec 'resources'
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [pseudo, setPseudo] = useState('John Doe');
+    const [pseudo, setPseudo] = useState('Tony Sylvestre');
 
     const handleEditProfile = () => {
         setIsModalOpen(true);
@@ -34,9 +33,9 @@ export default function ProfilCard() {
     };
 
     return (
-        <View>
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
             <View style={styles.containerCard}>
-                <View>
+                <View style={styles.profileContainer}>
                     <Image
                         source={require('../../../public/img/pdp.png')}
                         style={styles.profileImage}
@@ -75,10 +74,11 @@ export default function ProfilCard() {
                     </TouchableOpacity>
                 </View>
 
-                <View>
+                <View style={styles.resources}>
                     {selectedOption === 'resources' && <RessourcePresentation ressource={resourceData} />}
                 </View>
             </View>
+
 
             <Modal
                 visible={isModalOpen}
@@ -99,6 +99,6 @@ export default function ProfilCard() {
                     </View>
                 </View>
             </Modal>
-        </View>
+        </ScrollView>
     );
 }
