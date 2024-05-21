@@ -22,9 +22,9 @@ export const styles = StyleSheet.create({
     },
 
     profileImage: {
-        width: 100, // Taille fixe pour l'image
+        width: 100, 
         height: 100,
-        borderRadius: 50, // Pour une image circulaire
+        borderRadius: 50,
         marginBottom: 10,
     },
 
@@ -32,13 +32,13 @@ export const styles = StyleSheet.create({
         color: '#03989E',
         fontSize: 24,
         fontWeight: '700',
-        textAlign: 'center', // Centre le texte
+        textAlign: 'center', 
     },
 
     stats: {
         fontWeight: '700',
         marginTop: 5,
-        textAlign: 'center', // Centre le texte
+        textAlign: 'center', 
     },
 
     button: {
@@ -100,14 +100,14 @@ export const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.3,
         shadowRadius: 2,
-        width: '80%', // Ajuste la largeur du modal
-        alignItems: 'center', // Centre le contenu du modal
+        width: '80%', 
+        alignItems: 'center', 
     },
     modalTitle: {
         fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 10,
-        textAlign: 'center', // Centre le texte
+        textAlign: 'center',
     },
     input: {
         borderWidth: 1,
@@ -115,8 +115,8 @@ export const styles = StyleSheet.create({
         borderRadius: 5,
         padding: 10,
         marginBottom: 10,
-        width: '100%', // Prend toute la largeur disponible
-        textAlign: 'center', // Centre le texte
+        width: '100%', 
+        textAlign: 'center',
     },
     modalButton: {
         backgroundColor: '#03989E'
