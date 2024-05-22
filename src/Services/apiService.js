@@ -1,4 +1,5 @@
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import getApiUrl from './getApiUrl';
 
 class ApiService {
@@ -12,21 +13,32 @@ class ApiService {
     }
 
     async login(email, password) {
-        try {
-            const response = await axios.post(getApiUrl('/login_check'), {
-                email,
-                password,
-            });
+        const response = await axios.post(getApiUrl('/login_check'), {
+            email,
+            password,
+        });
 
-            // Vérifier si la réponse a été réussie avant d'accéder à la propriété data
-            if (response.status === 200) {
-                return response.data;
-            } else {
-                throw new Error('La requête de connexion a échoué');
+        const { token, refresh_token } = response.data;
+        
+        await AsyncStorage.setItem('token', token);
+        await AsyncStorage.setItem('refresh_token', refresh_token);
+
+        return response.data;
+    }
+
+    async logout() {
+        await AsyncStorage.removeItem('token');
+        await AsyncStorage.removeItem('refresh_token');
+    }
+
+    async fetchData(endpoint) {
+        const token = await AsyncStorage.getItem('token');
+        const response = await axios.get(getApiUrl(endpoint), {
+            headers: {
+                'Authorization': `Bearer ${token}`
             }
-        } catch (error) {
-            throw new Error('Une erreur est survenue lors de la connexion: ' + error.message);
-        }
+        });
+        return response.data;
     }
 }
 
