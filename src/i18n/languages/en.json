@@ -31,6 +31,7 @@
         "category.SearchingForMeaning": "Searching for Meaning",
         "category.PhysicHealth": "Physical Health",
         "category.MentalHealth": "Mental Health",
-        "category.Spirituality": "Spirituality"
+        "category.Spirituality": "Spirituality",
+        "category.AffectiveLife":"Affective Life"
     }
 }
