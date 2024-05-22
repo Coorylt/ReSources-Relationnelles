@@ -9,7 +9,22 @@ import { styles } from './style';
 type Category = {
     id: number;
     title: string;
-    image:string;
+};
+
+const categoryImages = {
+    Communication: require('../../../public/img/Communication.jpg'),
+    Cultures: require('../../../public/img/Cultures.jpg'),
+    PersonnalDev: require('../../../public/img/PersonnalDev.jpg'),
+    EmotionalIntelligence: require('../../../public/img/EmotionalIntelligence.jpg'),
+    Hobbies: require('../../../public/img/Hobbies.jpg'),
+    ProfessionalWorld: require('../../../public/img/ProfessionalWorld.jpg'),
+    Parenthood: require('../../../public/img/Parenthood.jpg'),
+    LifeQuality: require('../../../public/img/LifeQuality.jpg'),
+    SearchingForMeaning: require('../../../public/img/SearchingForMeaning.jpg'),
+    PhysicHealth: require('../../../public/img/PhysicHealth.jpg'),
+    MentalHealth: require('../../../public/img/MentalHealth.jpg'),
+    Spirituality: require('../../../public/img/Spirituality.jpg'),
+    AffectiveLife: require('../../../public/img/AffectiveLife.jpg'),
 };
 
 export default function CategorysPage() {
@@ -42,21 +57,14 @@ export default function CategorysPage() {
             <View style={styles.container}>
                 <Text style={styles.heading}>Catégories</Text>
                 <View style={styles.categoryContainer}>
-                    {categories ? (
-                        categories.map((category) => (
-                            <View key={category.id} style={[styles.categoryBox, { backgroundColor: `color${category.title}` }]}>
-                                <Image source={ require(`../../../public/img/Communication.jpg/`)} style={styles.categoryImage} />
-                                <Text style={styles.categoryTitle}>{t("category." + category.title)}</Text>
-                            </View>
-                        ))
-                    ) : (
-                        <LoadingScreen />
-                    )}
+                    {categories.map((category) => (
+                        <View key={category.id} style={[styles.categoryBox, { backgroundColor: `color${category.title}` }]}>
+                            <Image source={categoryImages[category.title]} style={styles.categoryImage} />
+                            <Text style={styles.categoryTitle}>{t("category." + category.title)}</Text>
+                        </View>
+                    ))}
                 </View>
-
-
             </View>
         </ScrollView>
     );
 }
-
