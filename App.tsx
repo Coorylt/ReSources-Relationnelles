@@ -1,4 +1,7 @@
 import React from 'react';
+import 'react-native-gesture-handler';
+import { registerRootComponent } from 'expo';
+import { TextEncoder, TextDecoder } from 'text-encoding';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { NavigationContainer, DrawerActions } from '@react-navigation/native';
@@ -14,6 +17,13 @@ import './src/i18n/i18n.config'
 import About from './src/screens/About/About';
 import Resources from './src/screens/Resources/Resources';
 const Drawer = createDrawerNavigator();
+
+
+if (typeof global.TextEncoder === 'undefined') {
+  global.TextEncoder = TextEncoder;
+  global.TextDecoder = TextDecoder;
+}
+
 
 interface DrawerItem {
   name: string;

@@ -19,6 +19,18 @@
         "create_account":"Créer un compte",
         "edit_profil":"Modifier mon profil",
         "my_likes":"Mes Likes",
-        "my_ressources":"Mes Ressources"
+        "my_ressources":"Mes Ressources",
+        "category.Communication":"Communication",
+        "category.Cultures":"Cultures",
+        "category.PersonnalDev":"Développement Personnel",
+        "category.EmotionalIntelligence":"Intelligence Émotionnelle",
+        "category.Hobbies":"Hobbies",
+        "category.ProfessionalWorld":"monde professionnel",
+        "category.Parenthood":"Parentalité",
+        "category.LifeQuality":"Qualité de vie",
+        "category.SearchingForMeaning":"Recherche de sens",
+        "category.PhysicHealth":"Santé Physique",
+        "category.MentalHealth":"Santé Mental",
+        "category.Spirituality":"Spiritualité"
     }
 }

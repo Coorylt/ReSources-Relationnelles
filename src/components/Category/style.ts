@@ -2,30 +2,10 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
-    borderRadius: 50,
+    flex: 1,
+    padding: 20,
   },
-
-  image: {
-    width: 180,
-    height: 90,
-    resizeMode: 'cover',
-  },
-
-  textContainer: {
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    overflow: 'hidden',
-  },
-
-  text: {
-    textAlign: 'center',
-    paddingTop: 5,
-    color: 'white',
-    width: 180,
-    height: 30,
-    fontWeight: 'bold',
-  },
-  title: {
+  heading: {
     marginBottom: 30,
     textAlign: 'center',
     fontSize: 48,
@@ -34,8 +14,27 @@ export const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
   categoryContainer: {
-    borderRadius: 20,
-    overflow: 'hidden',
-    marginHorizontal:8,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  categoryBox: {
+    width: '45%',
+    aspectRatio: 1,
+    borderRadius: 10,
+    marginBottom: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  categoryImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 10,
+  },
+  categoryTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 10,
+    textAlign: 'center',
   },
 });

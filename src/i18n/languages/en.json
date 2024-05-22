@@ -10,17 +10,27 @@
         "about": "About",
         "faq": "FAQ",
         "frequently_asked_questions": "Frequently asked questions",
-        "email":"My email",
+        "email": "My email",
         "password": "Password",
         "confirm_password": "Confirm your password",
-        "my_name":"My Last Name",
-        "my_firstName":"My First Name",
-        "signin":"Sign In",
-        "create_account":"Create an account",
-        "edit_profil":"Edit your profil",
-        "my_ressources":"My Ressources",
-        "my_likes":"My Likes"
-
-
+        "my_name": "My Last Name",
+        "my_firstName": "My First Name",
+        "signin": "Sign In",
+        "create_account": "Create an account",
+        "edit_profil": "Edit your profil",
+        "my_ressources": "My Ressources",
+        "my_likes": "My Likes",
+        "category.Communication": "Communication",
+        "category.Cultures": "Cultures",
+        "category.PersonnalDev": "Personal Development",
+        "category.EmotionalIntelligence": "Emotional Intelligence",
+        "category.Hobbies": "Hobbies",
+        "category.ProfessionalWorld": "Professional World",
+        "category.Parenthood": "Parenthood",
+        "category.LifeQuality": "Quality of Life",
+        "category.SearchingForMeaning": "Searching for Meaning",
+        "category.PhysicHealth": "Physical Health",
+        "category.MentalHealth": "Mental Health",
+        "category.Spirituality": "Spirituality"
     }
 }

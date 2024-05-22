@@ -7,8 +7,8 @@ import React, { useState } from 'react';
 const Home = () => {
   return (
     <ScrollView>
-      <Login/>
-      {/* <Connexion/> */}
+      {/* <Login/> */}
+      <Connexion/>
     </ScrollView>
   );
 };
