@@ -45,7 +45,7 @@ export default function CategorysPage() {
                     {categories ? (
                         categories.map((category) => (
                             <View key={category.id} style={[styles.categoryBox, { backgroundColor: `color${category.title}` }]}>
-                                <Image source={{ uri: `./public/img${category.title}.jpg` }} style={styles.categoryImage} />
+                                <Image source={ require(`../../../public/img/Communication.jpg/`)} style={styles.categoryImage} />
                                 <Text style={styles.categoryTitle}>{t("category." + category.title)}</Text>
                             </View>
                         ))

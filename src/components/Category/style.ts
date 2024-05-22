@@ -17,24 +17,27 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+    marginBottom:'20%'
   },
   categoryBox: {
     width: '45%',
     aspectRatio: 1,
     borderRadius: 10,
-    marginBottom: 20,
+    marginBottom: 35,
     justifyContent: 'center',
     alignItems: 'center',
   },
   categoryImage: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 10,
+    width: '90%',
+    height: '90%',
+    borderRadius: 10,  
+
   },
   categoryTitle: {
     fontSize: 16,
     fontWeight: 'bold',
     marginTop: 10,
     textAlign: 'center',
+
   },
 });
