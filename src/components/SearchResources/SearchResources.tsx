@@ -49,7 +49,7 @@ const DropdownPicker: React.FC<DropdownPickerProps> = ({ label, options, selecte
     );
 };
 
-export default function FindResources() {
+export default function SearchResources() {
     const { t } = useTranslation();
 
     const [searchQuery, setSearchQuery] = useState('');
