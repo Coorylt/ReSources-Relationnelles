@@ -7,10 +7,10 @@ import RessourcePresentation from '../RessourcePresentation/RessourcePresentatio
 export default function ProfilCard() {
     const resourceData = {
         id: 1,
-        title: "Resource Title",
+        title: "Les chats",
         category: {
           id: 1,
-          title: "Category Title"
+          title: ""
         },
         likes: [],
         createdAt: "2024-05-25T12:00:00Z",

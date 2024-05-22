@@ -4,6 +4,16 @@ import { styles } from './style';
 import { useTranslation } from 'react-i18next';
 import apiServiceInstance from '../../Services/apiService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import ProfilCard from '../ProfilCard/ProfilCard';
+
+const saveUserData = async (userData) => {
+    try {
+        await AsyncStorage.setItem('user', JSON.stringify(userData));
+        console.log('User data saved:', userData);
+    } catch (error) {
+        console.error('Error saving user data:', error);
+    }
+};
 
 const Connexion = () => {
   const { t } = useTranslation();
@@ -34,6 +44,13 @@ const Connexion = () => {
       setIsLoggedIn(true);
       setError('');
       console.log("Connexion réussie", data);
+
+      // Sauvegarder les tokens utilisateur
+      await saveUserData({ token: data.token, refresh_token: data.refresh_token });
+
+      // Vérifiez si le refresh token est bien stocké
+      const storedRefreshToken = await AsyncStorage.getItem('refresh_token');
+      console.log("Stored refresh token:", storedRefreshToken);
     } catch (error) {
       setError('Email ou mot de passe incorrect.');
       console.error("Erreur lors de la connexion", error);
@@ -42,6 +59,7 @@ const Connexion = () => {
 
   const handleLogout = async () => {
     await apiServiceInstance.logout();
+    await AsyncStorage.removeItem('user');
     setIsLoggedIn(false);
   };
 
@@ -49,16 +67,16 @@ const Connexion = () => {
     <View style={styles.container}>
       {isLoggedIn ? (
         <View>
-          <Text style={styles.title}>{t('Welcome')}</Text>
+          <ProfilCard />
           <TouchableOpacity style={styles.button} onPress={handleLogout}>
-            <Text style={styles.textButton}>{t('Se Déconnecter')}</Text>
+            <Text style={styles.textButton}>{t('disconect')}</Text>
           </TouchableOpacity>
         </View>
       ) : (
         <View>
           <Text style={styles.title}>{t('connexion')}</Text>
           <View>
-            <Text>{t('email')}</Text>
+            <Text style={styles.example}>{t('email')}</Text>
             <TextInput
               style={styles.input}
               placeholder="ex : jean.dupont@mail.fr"
@@ -67,7 +85,7 @@ const Connexion = () => {
             />
           </View>
           <View>
-            <Text>{t('password')}</Text>
+            <Text style={styles.example}>{t('password')}</Text>
             <TextInput
               style={styles.input}
               placeholder={t('password')}
@@ -78,7 +96,7 @@ const Connexion = () => {
           </View>
           {error ? <Text style={styles.error}>{error}</Text> : null}
           <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-            <Text style={styles.textButton}>{t('Se Connecter')}</Text>
+            <Text style={styles.textButton}>{t('Login')}</Text>
           </TouchableOpacity>
         </View>
       )}

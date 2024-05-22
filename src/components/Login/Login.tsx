@@ -1,95 +1,154 @@
-import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet, Alert, Text } from 'react-native';
-import { styles } from './style';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useTranslation } from 'react-i18next';
+// import React, { useState } from 'react';
+// import { View, TextInput, Button, StyleSheet, Alert, Text, TouchableOpacity } from 'react-native';
+// import { useTranslation } from 'react-i18next';
+// import apiServiceInstance from '../../Services/apiService';
 
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const { t } = useTranslation();
+// const  Login = ({ navigation }) => {
+//     const [email, setEmail] = useState('');
+//     const [firstName, setFirstName] = useState('');
+//     const [lastName, setLastName] = useState('');
+//     const [password, setPassword] = useState('');
+//     const [confirmPassword, setConfirmPassword] = useState('');
+//     const [dateOfBirth, setDateOfBirth] = useState('');
+//     const [pseudo, setPseudo] = useState('');
+//     const [showPassword, setShowPassword] = useState(false);
+//     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+//     const [error, setError] = useState('');
+//     const { t } = useTranslation();
 
+//     const formatDate = (dateString) => {
+//         const [day, month, year] = dateString.split('/');
+//         return `${year}-${month}-${day}`;
+//     };
 
-  const handleCreateAccount = () => {
-    if (!email || !firstName || !lastName || !password || !confirmPassword) {
-      Alert.alert('Tous les champs sont requis');
-      return;
-    }
+//     const handleSubmit = async () => {
+//       if (password !== confirmPassword) {
+//           setError("Les mots de passe ne correspondent pas.");
+//           return;
+//       }
+  
+//       try {
+//           const formattedDateOfBirth = formatDate(dateOfBirth);
+//           const userData = {
+//               email: email,
+//               firstName: firstName,
+//               lastName: lastName,
+//               password: password,
+//               dateOfBirth: formattedDateOfBirth,
+//               pseudo: pseudo
+//           };
+  
+//           console.log("User data to be sent:", userData);
+  
+//           const response = await apiServiceInstance.register(userData);
+//           console.log("Inscription réussie :", response);
+//           navigation.navigate('Login'); // Navigate to the login screen
+//       } catch (error) {
+//           console.error("Erreur lors de l'inscription :", error.response || error.message);
+//           if (error.response && error.response.status === 400) {
+//               setError("Erreur de validation des données. Veuillez vérifier les informations fournies.");
+//           } else {
+//               setError("Une erreur s'est produite lors de l'inscription. Veuillez réessayer.");
+//           }
+//       }
+//   };
+  
+//     const togglePasswordVisibility = () => {
+//         setShowPassword(!showPassword);
+//     };
 
-    if (password !== confirmPassword) {
-      Alert.alert('Les mots de passe ne correspondent pas');
-      return;
-    }
+//     const toggleConfirmPasswordVisibility = () => {
+//         setShowConfirmPassword(!showConfirmPassword);
+//     };
 
-    // Envoi des données au backend ou gestion de la création de compte
-    console.log('Email:', email);
-    console.log('Prénom:', firstName);
-    console.log('Nom:', lastName);
-    console.log('Mot de passe:', password);
-  };
+//     return (
+//         <View style={styles.container}>
+//             <Text style={styles.title}>{t('signin')} </Text>
+//             <TextInput
+//                 style={styles.input}
+//                 placeholder="ex : jean.dupont@mail.fr"
+//                 value={email}
+//                 onChangeText={setEmail}
+//                 keyboardType="email-address"
+//                 autoCapitalize="none"
+//             />
+//             <TextInput
+//                 style={styles.input}
+//                 placeholder="ex : Jean"
+//                 value={firstName}
+//                 onChangeText={setFirstName}
+//             />
+//             <TextInput
+//                 style={styles.input}
+//                 placeholder="ex : Dupont"
+//                 value={lastName}
+//                 onChangeText={setLastName}
+//             />
+//             <TextInput
+//                 style={styles.input}
+//                 placeholder="ex : MonPseudo"
+//                 value={pseudo}
+//                 onChangeText={setPseudo}
+//             />
+//             <TextInput
+//                 style={styles.input}
+//                 placeholder="ex : 01/01/2000"
+//                 value={dateOfBirth}
+//                 onChangeText={setDateOfBirth}
+//             />
+//             <View style={styles.passwordContainer}>
+//                 <TextInput
+//                     style={styles.input}
+//                     placeholder={t('password')}
+//                     secureTextEntry={!showPassword}
+//                     value={password}
+//                     onChangeText={setPassword}
+//                 />
+//                 <TouchableOpacity onPress={togglePasswordVisibility}>
+//                     <Text>{showPassword ? t('Hide') : t('Show')}</Text>
+//                 </TouchableOpacity>
+//             </View>
+//             <View style={styles.passwordContainer}>
+//                 <TextInput
+//                     style={styles.input}
+//                     placeholder={t('confirm_password')}
+//                     secureTextEntry={!showConfirmPassword}
+//                     value={confirmPassword}
+//                     onChangeText={setConfirmPassword}
+//                 />
+//                 <TouchableOpacity onPress={toggleConfirmPasswordVisibility}>
+//                     <Text>{showConfirmPassword ? t('Hide') : t('Show')}</Text>
+//                 </TouchableOpacity>
+//             </View>
+//             {error ? <Text style={styles.error}>{error}</Text> : null}
+//             <Button title={t('create_account')} onPress={handleSubmit} />
+//         </View>
+//     );
+// };
 
-  return (
-    <View style={[styles.container, styles.formContainer]}>
-      <Text style={styles.title}>{t('signin')} </Text>
-      <View style={styles.text}>
-        <Text>{t('email')}</Text>
-      </View>
-      <TextInput
-        style={styles.input}
-        placeholder="ex : jean.dupont@mail.fr"
-        value={email}
-        onChangeText={setEmail}
-      />
-      <View style={styles.text}>
-        <Text>{t('my_name')}</Text>
-      </View>
-      <TextInput
-        style={styles.input}
-        placeholder=" ex : Jean"
-        value={lastName}
-        onChangeText={setLastName}
-      />
-      <View style={styles.text}>
-        <Text>{t('my_firstName')}</Text>
-      </View>
-      <TextInput
-        style={styles.input}
-        placeholder="ex : Dupont"
-        value={firstName}
-        onChangeText={setFirstName}
-      />
-      <View style={styles.text}>
-        <Text>{t('password')}</Text>
-      </View>
-      <TextInput
-        style={styles.input}
-        placeholder={t('password')}
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-      <View style={styles.text}>
-        <Text>{t('confirm_password')}</Text>
-      </View>
-      <TextInput
-        style={styles.input}
-        placeholder={t('confirm_password')}
-        secureTextEntry
-        value={confirmPassword}
-        onChangeText={setConfirmPassword}
-      />
-      <TouchableOpacity
-        style={styles.button}
-        onPress={handleCreateAccount}
-      >
-        <Text style={styles.textButton}>{t('create_account')}</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
-export default Login;
+// const styles = StyleSheet.create({
+//     container: {
+//         flex: 1,
+//         padding: 20,
+//     },
+//     title: {
+//         fontSize: 24,
+//         marginBottom: 20,
+//     },
+//     input: {
+//         borderWidth: 1,
+//         borderColor: '#ccc',
+//         padding: 10,
+//         marginVertical: 10,
+//     },
+//     passwordContainer: {
+//         flexDirection: 'row',
+//         alignItems: 'center',
+//     },
+//     error: {
+//         color: 'red',
+//         marginBottom: 10,
+//     },
+// });
 
-
+// export default Login;

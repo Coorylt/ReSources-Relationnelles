@@ -6,7 +6,7 @@
         "message": "Message",
         "search_resources": "Trouver une Ressource",
         "new_resources": "Nouvelles Ressources",
-        "categories": "Catégories",
+        "categories.home": "Catégories",
         "about": "À propos",
         "faq": "FAQ",
         "frequently_asked_questions":"Foire aux questions",
@@ -32,6 +32,64 @@
         "category.PhysicHealth":"Santé Physique",
         "category.MentalHealth":"Santé Mental",
         "category.Spirituality":"Spiritualité",
-        "category.AffectiveLife":"Vie Affective"
+        "category.AffectiveLife":"Vie Affective",
+        "connexion":"Connexion",
+        "Login":"Se Connecter",
+        "disconect":"Se Déconnecter",
+        "publishResource": {
+            "createResource": "Publiez votre ressource",
+            "title": "Titre de la ressource",
+            "description": "Description de la ressource",
+            "category": "Catégorie",
+            "submit": "Soumettre la ressource",
+            "chooseCategory": "Choisir la catégorie",
+            "chooseResourceType" : "Choisir type de ressource",
+            "chooseRelationType" : "Choisir type de relation",
+            "pleaseLogin":"Connectez-vous pour pouvoir publier une ressource",
+            "private" : "Rendre la ressource privée ?",
+            "file" : "Choisir un fichier",
+            "resourceType" : "Type de ressource",
+            "relationType" : "Type de relation",
+            "image":"Fichier "
+          },
+          "resourceTypes": {
+            "ActivityGametobedone": "Activité / Jeu à réaliser",
+            "Article": "Article",
+            "ChallengeCard": "Carte défi",
+            "CourseinPDFformat": "Cours au format PDF",
+            "ExerciseWorkshop": "Exercice / Atelier",
+            "ReadingSheet": "Fiche de lecture",
+            "OnlineGame": "Jeu en ligne",
+            "Video": "Vidéo"
+          },
+          
+      "relationTypes": {
+        "Self": "Soi",
+        "Partner": "Conjoint",
+        "FamilyChildren": "Famille - Enfants",
+        "FamilyParents": "Famille - Parents",
+        "FamilySiblings": "Famille - Fratrie",
+        "ProfessionalColleagues": "Professionnelle - Collègues",
+        "ProfessionalCollaborators": "Professionnelle - Collaborateur",
+        "ProfessionalManagers": "Professionnelle - Managers",
+        "FriendsCommunity": "Amis et communauté",
+        "Strangers": "Inconnus"
+    },
+    "categories" : {
+        "Communication" : "Communication",
+        "Cultures" : "Cultures",
+        "PersonnalDev" : "Développement personel",
+        "EmotionalIntelligence" : "Intéligence émotionelle",
+        "Hobbies" : "Loisirs",
+        "ProfessionalWorld" : "Monde professionnel",
+        "Parenthood" :"Parentalité",
+        "LifeQuality" : "Qualité de vie",
+        "SearchingForMeaning" : "Recherche de sens",
+        "PhysicHealth" : "Santé physique",
+        "MentalHealth" : "Santé mental",
+        "Spirituality" : "Spiritualité",
+        "AffectiveLife" : "Vie affective"
+      },
+  
     }
 }

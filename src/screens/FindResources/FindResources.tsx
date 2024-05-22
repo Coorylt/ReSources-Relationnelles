@@ -1,11 +1,10 @@
-// Resources.tsx
-
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 import { styles } from './style';
 import RessourcePresentation from '../../components/RessourcePresentation/RessourcePresentation';
+import SearchResources from '../../components/SearchResources/SearchResources';
 
-const Resources = () => {
+const FindResources = () => {
   const resourceData = {
     id: 1,
     title: "Resource Title",
@@ -22,10 +21,11 @@ const Resources = () => {
   return (
     <ScrollView style={styles.container}>
       <View>
+        <SearchResources />
         <RessourcePresentation ressource={resourceData} />
       </View>
     </ScrollView>
   );
 };
 
-export default Resources;
+export default FindResources;

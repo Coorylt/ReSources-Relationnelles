@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'react-native-gesture-handler';
 import { registerRootComponent } from 'expo';
 import { TextEncoder, TextDecoder } from 'text-encoding';
-import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
-import { NavigationContainer, DrawerActions } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { StyleSheet, View, TouchableOpacity, Text, Image } from 'react-native';
 import { MaterialIcons, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
@@ -13,17 +12,19 @@ import FAQ from './src/screens/FAQ/FAQ';
 import Login from './src/screens/Login/Login';
 import Profile from './src/screens/Profile/Profile';
 import Category from './src/screens/Category/Category';
-import './src/i18n/i18n.config'
+import './src/i18n/i18n.config';
 import About from './src/screens/About/About';
 import Resources from './src/screens/Resources/Resources';
-const Drawer = createDrawerNavigator();
+import FindResources from './src/screens/FindResources/FindResources';
+import NewResources from './src/screens/NewResources/NewResources';
+import { Picker } from '@react-native-picker/picker';
 
+const Drawer = createDrawerNavigator();
 
 if (typeof global.TextEncoder === 'undefined') {
   global.TextEncoder = TextEncoder;
   global.TextDecoder = TextDecoder;
 }
-
 
 interface DrawerItem {
   name: string;
@@ -37,10 +38,10 @@ interface CustomDrawerContentProps {
 
 const drawerItems: DrawerItem[] = [
   { name: "home", icon: <MaterialIcons name="home" size={34} color="white" />, screen: Home },
-  { name: "my_account", icon: <MaterialCommunityIcons name="account" size={34} color="white" />, screen: Profile},
+  { name: "my_account", icon: <MaterialCommunityIcons name="account" size={34} color="white" />, screen: Profile },
   { name: "message", icon: <MaterialCommunityIcons name="message-outline" size={34} color="white" />, screen: Login },
-  { name: "search_resources", icon: <MaterialIcons name="search" size={34} color="white" />, screen: Home },
-  { name: "new_resources", icon: <MaterialIcons name="add" size={34} color="white" />, screen: Resources },
+  { name: "search_resources", icon: <MaterialIcons name="search" size={34} color="white" />, screen: FindResources },
+  { name: "new_resources", icon: <MaterialIcons name="add" size={34} color="white" />, screen: NewResources },
   { name: "Categories", icon: <MaterialCommunityIcons name="format-list-bulleted" size={34} color="white" />, screen: Category },
   { name: "about", icon: <MaterialCommunityIcons name="information-outline" size={34} color="white" />, screen: About },
   { name: "faq", icon: <Ionicons name="help-circle-outline" size={34} color="white" />, screen: FAQ },
@@ -63,11 +64,11 @@ function CustomDrawerContent({ navigation }: CustomDrawerContentProps) {
   return (
     <View style={styles.container}>
       <View style={styles.drawerHeader}>
-          <Image
-            source={require('./public/img/logo.png')}
-            style={{ width: 137, height: 80, alignSelf: 'center' }}
-            resizeMode="contain"
-          />
+        <Image
+          source={require('./public/img/logo.png')}
+          style={{ width: 137, height: 80, alignSelf: 'center' }}
+          resizeMode="contain"
+        />
       </View>
       <View style={styles.drawerItemsContainer}>
         {drawerItems.map((item, index) => renderItem(item, index))}
@@ -77,6 +78,14 @@ function CustomDrawerContent({ navigation }: CustomDrawerContentProps) {
 }
 
 export default function App() {
+  const { i18n } = useTranslation();
+  const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
+
+  const toggleLanguage = (lang: string) => {
+    setSelectedLanguage(lang);
+    i18n.changeLanguage(lang);
+  };
+
   return (
     <NavigationContainer>
       <Drawer.Navigator
@@ -98,7 +107,6 @@ export default function App() {
             options={{
               drawerIcon: ({ focused, size }) => item.icon,
               headerTitle: () => (
-                
                 <Image
                   source={require('./public/img/logo.png')}
                   style={{ width: 137, height: 80, alignSelf: 'center' }}
@@ -110,12 +118,16 @@ export default function App() {
                 backgroundColor: '#03989E',
               },
               headerRight: () => (
-                <TouchableOpacity
-                  style={{ marginRight: 10 }}
-                  onPress={() => console.log("Ceci est un bouton à droite dans la barre supérieure")}
-                >
-                    <MaterialCommunityIcons name="account" size={35} color="white" />
-                </TouchableOpacity>
+                <View style={styles.languageContainer}>
+                  <Picker
+                    selectedValue={selectedLanguage}
+                    style={styles.picker}
+                    onValueChange={(itemValue, itemIndex) => toggleLanguage(itemValue)}
+                  >
+                    <Picker.Item label="FR" value="fr" />
+                    <Picker.Item label="EN" value="en" />
+                  </Picker>
+                </View>
               ),
             }}
           />
@@ -138,7 +150,7 @@ const styles = StyleSheet.create({
   drawerHeaderText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'white'
+    color: 'white',
   },
   drawerItemsContainer: {
     flex: 1,
@@ -151,6 +163,24 @@ const styles = StyleSheet.create({
   drawerItemText: {
     marginLeft: 10,
     fontSize: 16,
-    color: 'white'
+    color: 'white',
+  },
+  languageContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor:'white',
+    height:'30%',
+    width:'85%',
+    marginRight:10,
+    borderRadius:20
+    // padding:20,
+  },
+
+  languageButtonText: {
+    color: '#03989E',
+  },
+  picker: {
+    width: '100%',
+
   },
 });

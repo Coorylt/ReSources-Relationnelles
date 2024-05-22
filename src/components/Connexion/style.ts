@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: '10%',
     paddingHorizontal: 20,
-    width: '90%',
+    width: '110%',
   },
   formContainer: {
     justifyContent: 'center',
@@ -30,6 +30,7 @@ export const styles = StyleSheet.create({
   },
   inputContainer: {
     marginBottom: 15,
+    
   },
   input: {
     height: 40,
@@ -38,7 +39,10 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
     backgroundColor: '#f9f9f9',
-    borderRadius: 5,
+    borderRadius: 15,
+    width:'80%',
+    alignSelf:'center'
+
   },
   button: {
     backgroundColor: '#03989E',
@@ -60,4 +64,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 10,
   },
+  example:{
+    left:50
+  }
 });
