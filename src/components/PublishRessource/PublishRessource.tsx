@@ -1,45 +1,123 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert, Switch, StyleSheet, Image } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Picker } from '@react-native-picker/picker';
 import { launchImageLibrary } from 'react-native-image-picker';
+import axios from 'axios';
+import getApiUrl from '../../Services/getApiUrl';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import LoadingScreen from '../LoadingScreen/LoadingScreen';
 
 export default function PublishResource() {
   const { t } = useTranslation();
 
-  const [categories, setCategories] = useState<Array<{ id: number; title: string }>>([]);
-  const [resourceTypes, setResourceTypes] = useState<Array<{ id: number; name: string }>>([]);
-  const [relationTypes, setRelationTypes] = useState<Array<{ id: number; title: string }>>([]);
-
+  const [categories, setCategories] = useState([]);
+  const [resourceTypes, setResourceTypes] = useState([]);
+  const [relationTypes, setRelationTypes] = useState([]);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [categoryId, setCategoryId] = useState('');
   const [error, setError] = useState('');
   const [isPrivate, setIsPrivate] = useState(false);
   const [resourceTypeId, setResourceTypeId] = useState('');
-  const [relationshipTypeIds, setRelationshipTypeIds] = useState<string[]>([]);
-
-  // État pour stocker l'image
-  const [image, setImage] = useState<string | null>(null);
+  const [relationshipTypeIds, setRelationshipTypeIds] = useState([]);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [file, setFile] = useState(null);
+  const [fileName, setFileName] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    // Remplacement des requêtes API par des données fictives
-    setCategories([
-      { id: 1, title: 'Category 1' },
-      { id: 2, title: 'Category 2' },
-    ]);
+    const checkAuthentication = async () => {
+      const token = await AsyncStorage.getItem('token');
+      setIsAuthenticated(!!token);
+    };
 
-    setResourceTypes([
-      { id: 1, name: 'Resource Type 1' },
-      { id: 2, name: 'Resource Type 2' },
-    ]);
-
-    setRelationTypes([
-      { id: 1, title: 'Relation Type 1' },
-      { id: 2, title: 'Relation Type 2' },
-    ]);
+    checkAuthentication();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [categoriesResponse, resourceTypesResponse, relationTypesResponse] = await Promise.all([
+          axios.get(getApiUrl('/categories')),
+          axios.get(getApiUrl('/ressource_types')),
+          axios.get(getApiUrl('/relationship_types'))
+        ]);
+
+        setCategories(categoriesResponse.data['hydra:member']);
+        setResourceTypes(resourceTypesResponse.data['hydra:member']);
+        setRelationTypes(relationTypesResponse.data['hydra:member']);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des données :", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleSubmit = async () => {
+    if (!isAuthenticated) {
+      return;
+    }
+
+    if (!title || !description || !categoryId || !resourceTypeId || relationshipTypeIds.length === 0) {
+      setError("Veuillez remplir tous les champs obligatoires.");
+      return;
+    }
+
+    try {
+      const token = await AsyncStorage.getItem('token');
+
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("description", description);
+      formData.append("isPrivate", isPrivate.toString());
+      formData.append("categoryId", categoryId);
+      formData.append("ressourceTypeId", resourceTypeId);
+      relationshipTypeIds.forEach(id => {
+        formData.append("relationshipTypeIds[]", id.toString());
+      });
+
+      if (file) {
+        formData.append("file", {
+          uri: file.uri,
+          type: file.type,
+          name: fileName,
+        });
+      }
+
+      const response = await axios.post(
+        getApiUrl("/ressources"),
+        formData,
+        {
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      console.log("Ressource créée avec succès :", response.data);
+      setSuccessMessage("La ressource a été créée avec succès !");
+      setError('');
+
+      // Réinitialiser le formulaire
+      setTitle('');
+      setDescription('');
+      setCategoryId('');
+      setResourceTypeId('');
+      setRelationshipTypeIds([]);
+      setFile(null);
+      setFileName('');
+      setIsPrivate(false);
+
+    } catch (error) {
+      console.error("Erreur lors de la création de la ressource :", error);
+      setError("Erreur lors de la création de la ressource.");
+      setSuccessMessage('');
+    }
+  };
+  
   const handleImagePicker = () => {
     launchImageLibrary({ mediaType: 'photo' }, (response) => {
       if (response.didCancel) {
@@ -47,21 +125,13 @@ export default function PublishResource() {
       } else if (response.errorCode) {
         console.error('ImagePicker Error: ', response.errorMessage);
       } else if (response.assets && response.assets.length > 0) {
-        const selectedImage = response.assets[0].uri;
-        setImage(selectedImage || null);
+        const selectedImage = response.assets[0];
+        setFile(selectedImage);
+        setFileName(selectedImage.fileName);
       }
     });
   };
 
-  const handleSubmit = () => {
-    if (!title || !description || !categoryId || !resourceTypeId || !relationshipTypeIds.length) {
-      setError(t('publishResource.fillAllFields'));
-      return;
-    }
-
-    // Remplacer par la logique de soumission réelle
-    Alert.alert(t('publishResource.resourceCreated'));
-  };
 
   return (
     <ScrollView style={styles.mainContainer}>
@@ -135,7 +205,7 @@ export default function PublishResource() {
           <TouchableOpacity style={styles.uploadButton} onPress={handleImagePicker}>
             <Text style={styles.uploadButtonText}>{t('publishResource.chooseFile')}</Text>
           </TouchableOpacity>
-          {image && <Image source={{ uri: image }} style={styles.imagePreview} />}
+          {/* {Image && <Image source={{ uri: image }} style={styles.imagePreview} />} */}
         </View>
         {error && <Text style={styles.error}>{error}</Text>}
         <View style={styles.formActions}>
@@ -229,3 +299,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { jwtDecode } from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import getApiUrl from '../Services/getApiUrl';
 
 const fetchRefreshToken = async (refreshToken: string) => {
@@ -11,7 +12,7 @@ const fetchRefreshToken = async (refreshToken: string) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                refresh_token: refreshToken, // Envoie le refresh token dans le corps de la requête
+                refresh_token: refreshToken,
             }),
         });
 
@@ -20,8 +21,7 @@ const fetchRefreshToken = async (refreshToken: string) => {
         }
 
         const data = await response.json();
-
-        return data.token; // Retourne le nouveau token
+        return data.token;
     } catch (error) {
         console.error('Erreur lors du rafraîchissement du token:', error);
         throw error;
@@ -42,58 +42,63 @@ const useAuth = () => {
     const [token, setToken] = useState('');
     const [role, setRole] = useState<string[]>([]);
     const [username, setUsername] = useState('');
-    const storedRefreshToken = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') || '').refresh_token : '';
 
     useEffect(() => {
         const checkTokenValidity = async () => {
-            const userData = localStorage.getItem('user');
-            if (userData) {
-                const parsedUserData = JSON.parse(userData);
-                setToken(parsedUserData.token);
+            try {
+                const userData = await AsyncStorage.getItem('user'); 
+                if (userData) {
+                    const parsedUserData = JSON.parse(userData);
+                    setToken(parsedUserData.token);
 
-                if (parsedUserData.token.split('.').length === 3) {
-                    try {
-                        const decoded: MyToken = jwtDecode(parsedUserData.token);
-                        setRole(decoded.roles);
-                        setUsername(decoded.username);
-                        setUserId(decoded.id);
-                        setIsAuthenticated(true);
+                    if (parsedUserData.token.split('.').length === 3) {
+                        try {
+                            const decoded: MyToken = jwtDecode(parsedUserData.token);
+                            setRole(decoded.roles);
+                            setUsername(decoded.username);
+                            setUserId(decoded.id);
+                            setIsAuthenticated(true);
 
-                        const expirationTime = decoded.exp * 1000;
-                        const currentTime = new Date().getTime();
-                        if (expirationTime < currentTime) {
-                            try {
-                                const newToken = await fetchRefreshToken(storedRefreshToken); // Utilise le refresh token
-                                const decodedNewToken: MyToken = jwtDecode(newToken);
-                                setToken(newToken);
-                                setRole(decodedNewToken.roles);
-                                setUsername(decodedNewToken.username);
-                                setUserId(decodedNewToken.id);
-                                setIsAuthenticated(true);
-                            } catch (error) {
-                                console.error('Erreur lors du rafraîchissement du token: ', error);
+                            const expirationTime = decoded.exp * 1000;
+                            const currentTime = new Date().getTime();
+                            if (expirationTime < currentTime) {
+                                try {
+                                    const newToken = await fetchRefreshToken(parsedUserData.refresh_token);
+                                    const decodedNewToken: MyToken = jwtDecode(newToken);
+                                    setToken(newToken);
+                                    setRole(decodedNewToken.roles);
+                                    setUsername(decodedNewToken.username);
+                                    setUserId(decodedNewToken.id);
+                                    setIsAuthenticated(true);
+
+                                    // Sauvegarder le nouveau token
+                                    await saveUserData({
+                                        token: newToken,
+                                        refresh_token: parsedUserData.refresh_token
+                                    });
+                                } catch (error) {
+                                    console.error('Erreur lors du rafraîchissement du token: ', error);
+                                    setIsAuthenticated(false);
+                                }
                             }
+                        } catch (error) {
+                            console.error('Token invalide: ', error);
+                            setIsAuthenticated(false);
                         }
-                    } catch (error) {
-                        console.error('Token invalide: ', error);
+                    } else {
+                        console.error('Token invalide: Format incorrect');
                         setIsAuthenticated(false);
                     }
                 } else {
-                    console.error('Token invalide: Format incorrect');
                     setIsAuthenticated(false);
                 }
-            } else {
-                setIsAuthenticated(false);
+            } catch (error) {
+                console.error('Erreur lors de la récupération des données utilisateur depuis AsyncStorage: ', error);
             }
             setIsLoading(false);
         };
 
         checkTokenValidity();
-
-        // Nettoyage
-        return () => {
-            // Vous pouvez effectuer des nettoyages ici si nécessaire
-        };
     }, []);
 
     return {

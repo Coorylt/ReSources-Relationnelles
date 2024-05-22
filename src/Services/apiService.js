@@ -19,11 +19,41 @@ class ApiService {
         });
 
         const { token, refresh_token } = response.data;
-        
+
         await AsyncStorage.setItem('token', token);
         await AsyncStorage.setItem('refresh_token', refresh_token);
 
         return response.data;
+    }
+
+    async register(email, firstName, lastName, password, dateOfBirth, pseudo) {
+        const data = {
+            "@context": "/api/contexts/User",
+            "@type": "User",
+            email,
+            firstName,
+            lastName,
+            password,
+            dateOfBirth,
+            pseudo,
+        };
+
+        try {
+            const response = await axios.post(
+                getApiUrl('/users'),
+                data,
+                {
+                    headers: {
+                        "Content-Type": "application/ld+json",
+                    },
+                }
+            );
+
+            return response.data;
+        } catch (error) {
+            console.error('API register error:', error.response);
+            throw error;
+        }
     }
 
     async logout() {
@@ -33,11 +63,32 @@ class ApiService {
 
     async fetchData(endpoint) {
         const token = await AsyncStorage.getItem('token');
+        if (!token) {
+            throw new Error('No token found');
+        }
+        
         const response = await axios.get(getApiUrl(endpoint), {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         });
+        
+        return response.data;
+    }
+
+    async postData(endpoint, data) {
+        const token = await AsyncStorage.getItem('token');
+        if (!token) {
+            throw new Error('No token found');
+        }
+
+        const response = await axios.post(getApiUrl(endpoint), data, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+
         return response.data;
     }
 }

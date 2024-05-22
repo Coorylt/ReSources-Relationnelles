@@ -48,7 +48,7 @@ export default function CategoryHome() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{t('categories')}</Text>
+      <Text style={styles.title}>{t('categories.home')}</Text>
       <FlatList
         ref={flatListRef}
         horizontal
