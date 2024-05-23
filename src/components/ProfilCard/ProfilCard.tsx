@@ -124,7 +124,7 @@ export default function ProfilCard() {
                         resizeMode="contain"
                     />
                     <Text style={styles.pseudo}>{pseudo}</Text>
-                    <Text style={styles.stats}>{`${filteredResources.length} ressources - 85 likes`}</Text>
+                    <Text style={styles.stats}>{`${filteredResources.length} ressources - 0 likes`}</Text>
                     <TouchableOpacity onPress={handleEditProfile}>
                         <Text style={styles.button}>{t('edit_profil')}</Text>
                     </TouchableOpacity>
