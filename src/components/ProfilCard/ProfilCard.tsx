@@ -47,10 +47,8 @@ export default function ProfilCard() {
             try {
                 setLoading(true);
                 const url = getApiUrl(`/public/ressources?page=${currentPage}`);
-                console.log(`Fetching resources from URL: ${url}`);
                 const response = await axios.get(url);
 
-                console.log('Full response:', response);
                 const newResources = response.data;
 
                 if (newResources.length < 5) {
@@ -77,7 +75,6 @@ export default function ProfilCard() {
     };
 
     const handleSaveChanges = () => {
-        console.log("Sending updated profile data to backend:", pseudo);
         setIsModalOpen(false);
     };
 
@@ -87,7 +84,6 @@ export default function ProfilCard() {
         const relationType = searchParams.get('relation');
         const keyword = searchParams.get('keyword') || "";
 
-        console.log('Filtering resources with:', { categoryId, resourceType, relationType, keyword });
 
         const filtered = allResources.filter(resource => {
             let matchesCategory = true;

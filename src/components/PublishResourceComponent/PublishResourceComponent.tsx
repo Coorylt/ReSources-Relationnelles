@@ -70,7 +70,6 @@ export default function PublishResourceComponent() {
                 }
             );
 
-            console.log("Ressource créée avec succès :", response.data);
             setSuccessMessage("La ressource a été créée avec succès !");
             setError('');
 

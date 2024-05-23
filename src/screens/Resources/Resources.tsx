@@ -46,10 +46,8 @@ export default function Resources() {
       try {
         setLoading(true);
         const url = getApiUrl(`/public/ressources?page=${currentPage}`);
-        console.log(`Fetching resources from URL: ${url}`);
         const response = await axios.get(url);
         
-        console.log('Full response:', response);
         const newResources = response.data;
 
         if (newResources.length < 5) {
@@ -58,7 +56,6 @@ export default function Resources() {
         setAllResources(prevResources => currentPage === 1 ? newResources : [...prevResources, ...newResources]);
         setLoading(false);
       } catch (error) {
-        console.error("Erreur lors de la récupération des ressources", error);
         Alert.alert("Erreur", "Erreur lors de la récupération des ressources");
         setLoading(false);
       }
@@ -73,7 +70,6 @@ export default function Resources() {
     const relationType = searchParams.get('relation');
     const keyword = searchParams.get('keyword') || "";
 
-    console.log('Filtering resources with:', { categoryId, resourceType, relationType, keyword });
 
     const filtered = allResources.filter(resource => {
       let matchesCategory = true;

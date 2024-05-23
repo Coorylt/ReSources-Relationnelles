@@ -44,7 +44,6 @@ interface CustomDrawerContentProps {
 const drawerItems: DrawerItem[] = [
   { name: "home", icon: <MaterialIcons name="home" size={34} color="white" />, screen: Home },
   { name: "my_account", icon: <MaterialCommunityIcons name="account" size={34} color="white" />, screen: Login },
-  { name: "message", icon: <MaterialCommunityIcons name="message-outline" size={34} color="white" />, screen: ResourcesDetails },
   { name: "search_resources", icon: <MaterialIcons name="search" size={34} color="white" />, screen: Resources },
   { name: "new_resources", icon: <MaterialIcons name="add" size={34} color="white" />, screen: NewResources },
   { name: "Categories", icon: <MaterialCommunityIcons name="format-list-bulleted" size={34} color="white" />, screen: Category },
@@ -94,7 +93,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        initialRouteName="Accueil"
+        initialRouteName="home"
         drawerContent={props => <CustomDrawerContent {...props} />}
         screenOptions={{
           headerShown: true,
