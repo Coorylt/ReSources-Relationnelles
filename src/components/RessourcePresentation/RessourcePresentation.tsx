@@ -3,7 +3,7 @@ import { View, Text, ImageBackground, StyleSheet, Image, TouchableOpacity } from
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {styles } from './style'
+import { styles } from './style';
 
 const categoryImages = {
   Communication: require('../../../public/img/Communication.jpg'),
@@ -25,10 +25,6 @@ export default function RessourcePresentation(props: any) {
   const { t } = useTranslation();
   const navigation = useNavigation();
 
-  function handleSubmit() {
-    navigation.navigate('ResourceDetail', { id: props.ressource.id });
-  }
-
   const resource = props.ressource;
   const title = resource.title || "Untitled";
   const category = resource.category.title ? resource.category.title : "Unknown";
@@ -36,8 +32,12 @@ export default function RessourcePresentation(props: any) {
   const publishDate = resource.createdAt ? new Date(resource.createdAt) : new Date();
   const viewsCount = resource.viewsCount ? resource.viewsCount : 0;
 
+  const handleContainerPress = () => {
+    navigation.navigate('ResourceDetails', { id: resource.id });
+  };
+
   return (
-    <TouchableOpacity style={styles.container} onPress={handleSubmit}>
+    <TouchableOpacity style={styles.container} onPress={handleContainerPress}>
       <View style={styles.imageContainer}>
         <ImageBackground source={categoryImages[category]} style={styles.image} imageStyle={styles.imageStyle}>
           <View style={styles.overlay} />
@@ -69,7 +69,7 @@ function getColorByCategory(category: string) {
     Hobbies: '#FF5733',
     ProfessionalWorld: '#FFC300',
     Parenthood: '#DAF7A6',
-    LifeQuality: '#FFC300',
+    LifeQuality: '#FFAFB4',
     SearchingForMeaning: '#FF5733',
     PhysicHealth: '#C70039',
     MentalHealth: '#900C3F',
@@ -78,4 +78,3 @@ function getColorByCategory(category: string) {
   };
   return colors[category] || '#ccc';
 }
-

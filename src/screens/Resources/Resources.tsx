@@ -150,7 +150,7 @@ export default function Resources() {
 const styles = StyleSheet.create({
   ressourcesMainDiv: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#EAE5E0',
   },
   ressourcesMainContainer: {
     flex: 1,
