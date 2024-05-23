@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 15,
         color: 'white',
-        padding:15,
+        padding: 15,
         backgroundColor: "#03989E",
         width: 278,
         paddingHorizontal: 50,
@@ -26,12 +26,11 @@ export const styles = StyleSheet.create({
         fontStyle: 'italic',
         flexWrap: 'wrap',
         textAlignVertical: 'center',
-
     },
     title: {
         marginTop: 25,
         marginBottom: 30,
-        textAlign: 'center', 
+        textAlign: 'center',
         fontSize: 48,
         color: '#F7A932',
         fontWeight: '700',
@@ -41,6 +40,5 @@ export const styles = StyleSheet.create({
         borderRadius: 40,
         overflow: 'hidden',
         marginHorizontal: 55,
-        
     },
 });

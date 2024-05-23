@@ -71,7 +71,7 @@ export default function CategorysHome() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Catégories</Text>
+            <Text style={styles.title}>{t("categories.home")}</Text>
             <FlatList
                 data={categories}
                 horizontal
