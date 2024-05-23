@@ -1,111 +1,81 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {styles } from './style'
 
-interface RessourcePresentationProps {
-    ressource: {
-        title?: string;
-        category?: {
-            title?: string;
-        };
-        likes?: any[];
-        createdAt?: string;
-        viewsCount?: number;
-        id: number;
-    };
+const categoryImages = {
+  Communication: require('../../../public/img/Communication.jpg'),
+  Cultures: require('../../../public/img/Cultures.jpg'),
+  PersonnalDev: require('../../../public/img/PersonnalDev.jpg'),
+  EmotionalIntelligence: require('../../../public/img/EmotionalIntelligence.jpg'),
+  Hobbies: require('../../../public/img/Hobbies.jpg'),
+  ProfessionalWorld: require('../../../public/img/ProfessionalWorld.jpg'),
+  Parenthood: require('../../../public/img/Parenthood.jpg'),
+  LifeQuality: require('../../../public/img/LifeQuality.jpg'),
+  SearchingForMeaning: require('../../../public/img/SearchingForMeaning.jpg'),
+  PhysicHealth: require('../../../public/img/PhysicHealth.jpg'),
+  MentalHealth: require('../../../public/img/MentalHealth.jpg'),
+  Spirituality: require('../../../public/img/Spirituality.jpg'),
+  AffectiveLife: require('../../../public/img/AffectiveLife.jpg'),
+};
+
+export default function RessourcePresentation(props: any) {
+  const { t } = useTranslation();
+  const navigation = useNavigation();
+
+  function handleSubmit() {
+    navigation.navigate('ResourceDetail', { id: props.ressource.id });
+  }
+
+  const resource = props.ressource;
+  const title = resource.title || "Untitled";
+  const category = resource.category.title ? resource.category.title : "Unknown";
+  const likesLength = resource.likes ? resource.likes.length : 0;
+  const publishDate = resource.createdAt ? new Date(resource.createdAt) : new Date();
+  const viewsCount = resource.viewsCount ? resource.viewsCount : 0;
+
+  return (
+    <TouchableOpacity style={styles.container} onPress={handleSubmit}>
+      <View style={styles.imageContainer}>
+        <ImageBackground source={categoryImages[category]} style={styles.image} imageStyle={styles.imageStyle}>
+          <View style={styles.overlay} />
+        </ImageBackground>
+      </View>
+      <View style={styles.infoContainer}>
+        <Text style={styles.title}>{title}</Text>
+        <View style={styles.categoryContainer}>
+          <Text style={[styles.category, { backgroundColor: getColorByCategory(category) }]}>
+            {t(`categories.${category}`)}
+          </Text>
+        </View>
+        <View style={styles.stats}>
+          <Text style={styles.stat}><Icon name="eye" size={14} /> {viewsCount}</Text>
+          <Text style={styles.stat}><Icon name="bookmark" size={14} /> {likesLength}</Text>
+          <Text style={styles.stat}><Icon name="calendar" size={14} /> {publishDate.toLocaleDateString("fr-FR")}</Text>
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
 }
 
-
-export default function RessourcePresentation({ ressource }: RessourcePresentationProps) {
-    const { t } = useTranslation();
-
-    function handlePress() {
-        console.log("Navigating to resource details page:", ressource.id);
-    }
-
-    const title = ressource.title || "Untitled";
-    const category = ressource.category?.title || "Unknown";
-    const likesLength = ressource.likes?.length || 0;
-    const publishDate = ressource.createdAt ? new Date(ressource.createdAt) : new Date();
-    const viewsCount = ressource.viewsCount || 0;
-
-    return (
-        <TouchableOpacity style={styles.container} onPress={handlePress}>
-            <Image
-                source={require('../../../public/img/cat.jpg')} style={styles.image} />
-            <View style={styles.info}>
-                <Text style={styles.title}>{title}</Text>
-                <View style={styles.categoryContainer}>
-                    <Text style={[styles.category, styles.colorCategory]}>{t(`categories.${category}`)}</Text>
-                </View>
-                <View style={styles.statsContainer}>
-                    <View style={styles.stat}>
-                        <MaterialCommunityIcons name="eye-outline" size={20} color="black" />
-                        <Text>{viewsCount}</Text>
-                    </View>
-                    <View style={styles.stat}>
-                        <MaterialCommunityIcons name="bookmark-outline" size={20} color="black" />
-                        <Text>{likesLength}</Text>
-                    </View>
-                    <View style={styles.stat}>
-                        <MaterialCommunityIcons name="calendar" size={20} color="black" />
-                        <Text>{publishDate.toLocaleDateString("fr-FR")}</Text>
-                    </View>
-                </View>
-            </View>
-        </TouchableOpacity>
-    );
+function getColorByCategory(category: string) {
+  const colors = {
+    Communication: '#FF5733',
+    Cultures: '#C70039',
+    PersonnalDev: '#900C3F',
+    EmotionalIntelligence: '#581845',
+    Hobbies: '#FF5733',
+    ProfessionalWorld: '#FFC300',
+    Parenthood: '#DAF7A6',
+    LifeQuality: '#FFC300',
+    SearchingForMeaning: '#FF5733',
+    PhysicHealth: '#C70039',
+    MentalHealth: '#900C3F',
+    Spirituality: '#581845',
+    AffectiveLife: '#DAF7A6',
+  };
+  return colors[category] || '#ccc';
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: 'white',
-        borderRadius: 15,
-        padding: 10,
-        marginBottom: 10,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 2,
-        elevation: 2,
-        borderColor: '#03989E',
-        borderWidth: 2,
-        marginHorizontal: 15,
-    },
-    image: {
-        width: 100,
-        height: 100,
-        borderRadius: 10,
-        marginRight: 10,
-    },
-    info: {
-        flex: 1,
-    },
-    title: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 5,
-    },
-    categoryContainer: {
-        flexDirection: 'row',
-        marginBottom: 5,
-    },
-    category: {
-        fontSize: 16,
-        marginRight: 5,
-    },
-    colorCategory: {
-        color: '#03989E',
-    },
-    statsContainer: {
-        flexDirection: 'row',
-    },
-    stat: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginRight: 10,
-    },
-});

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert, Switch, StyleSheet, Image } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Picker } from '@react-native-picker/picker';
-import { launchImageLibrary } from 'react-native-image-picker';
+import * as DocumentPicker from 'expo-document-picker';
 import axios from 'axios';
 import getApiUrl from '../../Services/getApiUrl';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -117,21 +117,20 @@ export default function PublishResource() {
       setSuccessMessage('');
     }
   };
-  
-  const handleImagePicker = () => {
-    launchImageLibrary({ mediaType: 'photo' }, (response) => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.errorCode) {
-        console.error('ImagePicker Error: ', response.errorMessage);
-      } else if (response.assets && response.assets.length > 0) {
-        const selectedImage = response.assets[0];
-        setFile(selectedImage);
-        setFileName(selectedImage.fileName);
-      }
-    });
-  };
 
+  const handleFilePicker = async () => {
+    try {
+      const result = await DocumentPicker.getDocumentAsync({ type: '*/*' });
+  
+      if (result.type === 'success') {
+        setFile(result);
+        setFileName(result.name);
+      }
+    } catch (error) {
+      console.error('Error picking document: ', error);
+    }
+  };
+  
 
   return (
     <ScrollView style={styles.mainContainer}>
@@ -201,11 +200,11 @@ export default function PublishResource() {
           />
         </View>
         <View style={styles.formGroup}>
-          <Text style={styles.label}>{t('publishResource.image')}:</Text>
-          <TouchableOpacity style={styles.uploadButton} onPress={handleImagePicker}>
+          <Text style={styles.label}>{t('publishResource.file')}:</Text>
+          <TouchableOpacity style={styles.uploadButton} onPress={handleFilePicker}>
             <Text style={styles.uploadButtonText}>{t('publishResource.chooseFile')}</Text>
           </TouchableOpacity>
-          {/* {Image && <Image source={{ uri: image }} style={styles.imagePreview} />} */}
+          {fileName ? <Text>{fileName}</Text> : null}
         </View>
         {error && <Text style={styles.error}>{error}</Text>}
         <View style={styles.formActions}>
@@ -299,5 +298,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
-
