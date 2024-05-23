@@ -143,6 +143,7 @@ export default function App() {
 
           />
         ))}
+        <Drawer.Screen name="Home" component={Home} />
         <Drawer.Screen name="RessourcePresentation" component={RessourcePresentation} />
       </Drawer.Navigator>
     </NavigationContainer>
