@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert, Switch, StyleSheet, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert, Switch, StyleSheet, Image, Modal } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Picker } from '@react-native-picker/picker';
 import * as DocumentPicker from 'expo-document-picker';
@@ -25,6 +25,7 @@ export default function PublishResource() {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     const checkAuthentication = async () => {
@@ -99,6 +100,7 @@ export default function PublishResource() {
 
       setSuccessMessage("La ressource a été créée avec succès !");
       setError('');
+      setIsModalVisible(true); // Show modal on success
 
       // Réinitialiser le formulaire
       setTitle('');
@@ -120,7 +122,7 @@ export default function PublishResource() {
   const handleFilePicker = async () => {
     try {
       const result = await DocumentPicker.getDocumentAsync({ type: '*/*' });
-  
+
       if (result.type === 'success') {
         setFile(result);
         setFileName(result.name);
@@ -129,7 +131,6 @@ export default function PublishResource() {
       console.error('Error picking document: ', error);
     }
   };
-  
 
   return (
     <ScrollView style={styles.mainContainer}>
@@ -212,6 +213,28 @@ export default function PublishResource() {
           </TouchableOpacity>
         </View>
       </View>
+
+      {/* Modal for success message */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isModalVisible}
+        onRequestClose={() => {
+          setIsModalVisible(!isModalVisible);
+        }}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>Félicitations, la ressource a été publiée !</Text>
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={() => setIsModalVisible(false)}
+            >
+              <Text style={styles.closeButtonText}>OK</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </ScrollView>
   );
 }
@@ -295,5 +318,32 @@ const styles = StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
     fontWeight: 'bold',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    width: 300,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 20,
+    alignItems: 'center',
+  },
+  modalText: {
+    fontSize: 18,
+    marginBottom: 20,
+  },
+  closeButton: {
+    backgroundColor: '#007bff',
+    padding: 10,
+    borderRadius: 5,
+  },
+  closeButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    textAlign: 'center',
   },
 });
