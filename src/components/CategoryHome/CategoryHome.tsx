@@ -1,66 +1,90 @@
-import React, { useRef, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, FlatList, Dimensions } from 'react-native';
-import { styles } from './style';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, FlatList,  } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import axios from "axios";
+import LoadingScreen from '../LoadingScreen/LoadingScreen';
+import getApiUrl from '../../Services/getApiUrl';
+import { styles } from './style';
 
-interface Category {
-  id: number;
-  name: string;
-  image: any; 
-  color: string;
+type Category = {
+    id: number;
+    title: string;
+};
+
+const categoryImages = {
+    Communication: require('../../../public/img/Communication.jpg'),
+    Cultures: require('../../../public/img/Cultures.jpg'),
+    PersonnalDev: require('../../../public/img/PersonnalDev.jpg'),
+    EmotionalIntelligence: require('../../../public/img/EmotionalIntelligence.jpg'),
+    Hobbies: require('../../../public/img/Hobbies.jpg'),
+    ProfessionalWorld: require('../../../public/img/ProfessionalWorld.jpg'),
+    Parenthood: require('../../../public/img/Parenthood.jpg'),
+    LifeQuality: require('../../../public/img/LifeQuality.jpg'),
+    SearchingForMeaning: require('../../../public/img/SearchingForMeaning.jpg'),
+    PhysicHealth: require('../../../public/img/PhysicHealth.jpg'),
+    MentalHealth: require('../../../public/img/MentalHealth.jpg'),
+    Spirituality: require('../../../public/img/Spirituality.jpg'),
+    AffectiveLife: require('../../../public/img/AffectiveLife.jpg'),
+};
+
+// Colors for each category
+const categoryColors = {
+    Communication: '#FF5733',
+    Cultures: '#C70039',
+    PersonnalDev: '#900C3F',
+    EmotionalIntelligence: '#581845',
+    Hobbies: '#FF5733',
+    ProfessionalWorld: '#FFC300',
+    Parenthood: '#DAF7A6',
+    LifeQuality: '#FFC300',
+    SearchingForMeaning: '#FF5733',
+    PhysicHealth: '#C70039',
+    MentalHealth: '#900C3F',
+    Spirituality: '#581845',
+    AffectiveLife: '#DAF7A6',
+};
+
+export default function CategorysHome() {
+    const [categories, setCategories] = useState<Category[] | null>(null);
+    const [categoriesError, setCategoriesError] = useState<string | null>(null);
+    const { t } = useTranslation();
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const categoriesResponse = await axios.get(getApiUrl('/categories?page=1'), {
+                    headers: {
+                        'Content-Type': 'application/ld+json',
+                    },
+                });
+                setCategories(categoriesResponse.data['hydra:member']);
+            } catch (err: any) {
+                setCategoriesError(err.message || 'Erreur lors de la récupération des ressources');
+            }
+        };
+
+        fetchCategories();
+    }, []);
+
+    if (!categories) return <LoadingScreen />;
+    if (categoriesError) return <View><Text>{categoriesError}</Text></View>;
+
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title}>{t("categories.home")}</Text>
+            <FlatList
+                data={categories}
+                horizontal
+                renderItem={({ item }) => (
+                    <View key={item.id} style={[styles.categoryContainer, { backgroundColor: categoryColors[item.title] || '#ccc' }]}>
+                        <Image source={categoryImages[item.title]} style={styles.image} />
+                        <Text style={styles.text}>{t("category." + item.title)}</Text>
+                    </View>
+                )}
+                keyExtractor={(item) => item.id.toString()}
+                showsHorizontalScrollIndicator={false}
+            />
+        </View>
+    );
 }
 
-export default function CategoryHome() {
-
-  const {t} = useTranslation();
-
-
-  const categorys: Category[] = [
-    { id: 1, name: "Culture", image: require('../../../public/img/cannard.webp/'), color: '#03989E' },
-    { id: 2, name: "Santé physique", image: require('../../../public/img/cat.jpg/'),color: '#F7A932' },
-    { id: 3, name: "Santé mentale", image: require('../../../public/img/dog.webp/'),color: '#4CAF50'  },
-    { id: 4, name: "Category 4", image: require('../../../public/img/italy.jpeg/'),color: '#4CAF50' },
-    { id: 5, name: "Category 5", image: require('../../../public/img/pexels-photo.jpeg/'),color: '#F7A932' },
-    { id: 6, name: "Category 6", image: require('../../../public/img/pexels.jpeg/'), color: '#03989E' },
-    { id: 7, name: "Category 7", image: require('../../../public/img/cannard.webp/'),color: '#4CAF50'  },
-    { id: 8, name: "Category 8", image: require('../../../public/img/cannard.webp/'),color: '#F7A932'},
-    { id: 9, name: "Category 9", image: require('../../../public/img/italy.jpeg/'),color: '#F7A932' },
-    { id: 10, name: "Category 10", image: require('../../../public/img/italy.jpeg/'), color: '#03989E' },
-    { id: 11, name: "Category 11", image: require('../../../public/img/italy.jpeg/') , color: '#F7A932'},
-    { id: 12, name: "Category 12", image: require('../../../public/img/italy.jpeg/'), color: '#4CAF50' },
-    { id: 13, name: "Category 13", image: require('../../../public/img/italy.jpeg/'), color: 'red' },
-  ];
-
-  const screenWidth = Dimensions.get('window').width;
-  const flatListRef = useRef<FlatList<Category> | null>(null);
-
-  const renderItem = ({ item }: { item: Category }) => (
-    <TouchableOpacity style={[styles.categoryContainer, { backgroundColor: item.color }]} onPress={() => console.log(item.name)}>
-      <Image
-        source={item.image}
-        style={styles.image}
-      />
-      <View style={styles.textContainer}>
-        <Text style={styles.text}>{item.name}</Text>
-      </View>
-    </TouchableOpacity>
-  );
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{t('categories.home')}</Text>
-      <FlatList
-        ref={flatListRef}
-        horizontal
-        data={categorys}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-        pagingEnabled
-        snapToAlignment={'start'}
-        decelerationRate={'fast'}
-        snapToInterval={screenWidth}
-        showsHorizontalScrollIndicator={false}
-      />
-    </View>
-  );
-}

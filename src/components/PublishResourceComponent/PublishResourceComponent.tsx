@@ -143,19 +143,9 @@ export default function PublishResourceComponent() {
             };
         }
     }, [successMessage]);
-
     if (!isAuthenticated) {
-        return (
-            <View style={styles.mainContainer}>
-                <View style={styles.publishResource}>
-                    <Text style={styles.errorMessage}>
-                        {t('publishResource.pleaseLogin')}
-                    </Text>
-                </View>
-            </View>
-        );
+        return <Text>Veuillez vous connecter pour créer une ressource.</Text>;
     }
-
     if (!categories.length || !resourceTypes.length || !relationTypes.length) {
         return <LoadingScreen />;
     }

@@ -3,32 +3,29 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 10,
-    borderRadius: 50,
+    paddingVertical: 20,
+    flex: 1,
   },
-
   image: {
     width: '100%',
     height: 110,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     resizeMode: 'cover',
   },
-
   textContainer: {
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     overflow: 'hidden',
   },
-
   text: {
     textAlign: 'center',
-    paddingTop: 5,
+    paddingVertical: 10,
     color: 'white',
-    width: 210,
-    height: 30,
-    paddingHorizontal: 50,
     fontWeight: 'bold',
   },
   title: {
-    marginBottom: 30,
+    marginBottom: 20,
     textAlign: 'center',
     fontSize: 48,
     color: '#F7A932',
@@ -38,6 +35,7 @@ export const styles = StyleSheet.create({
   categoryContainer: {
     borderRadius: 20,
     overflow: 'hidden',
-    marginHorizontal: 15,
+    margin: 10,
+    width: 200,
   },
 });
