@@ -126,6 +126,8 @@ export default function App() {
                   >
                     <Picker.Item label="FR" value="fr" />
                     <Picker.Item label="EN" value="en" />
+                    <Picker.Item label="DE" value="de" />
+                    <Picker.Item label="RU" value="ru" />
                   </Picker>
                 </View>
               ),

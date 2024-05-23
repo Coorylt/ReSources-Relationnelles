@@ -10,7 +10,7 @@ export default function ProfilCard() {
         title: "Les chats",
         category: {
           id: 1,
-          title: ""
+          title: "test"
         },
         likes: [],
         createdAt: "2024-05-25T12:00:00Z",
@@ -79,6 +79,7 @@ export default function ProfilCard() {
                 </View>
             </View>
 
+            {/* Modal */}
 
             <Modal
                 visible={isModalOpen}
