@@ -50,7 +50,8 @@
             "file" : "Choisir un fichier",
             "resourceType" : "Type de ressource",
             "relationType" : "Type de relation",
-            "image":"Fichier "
+            "image":"Fichier ",
+            "chooseFile":"Choix du fichier"
           },
           "resourceTypes": {
             "ActivityGametobedone": "Activité / Jeu à réaliser",
@@ -90,6 +91,20 @@
         "Spirituality" : "Spiritualité",
         "AffectiveLife" : "Vie affective"
       },
-  
+      "resourcesDetails" : {
+        "resourceNotFound" : "Cette ressource n'a pas été trouvée",
+        "saveButton" : "Mettre de coté",
+        "unsaveButton": "Ne plus mettre de coté",
+        "valideButton" : "Valider",
+        "refuseButton" : "Refuser",
+        "rejected" : "Votre ressource a été rejetée",
+        "pending" : "En attente de validation",
+        "deleteButton" : "Supprimer la ressource",
+        "likeButton":"J'aime ",
+        "unlikeButton":"Je n'aime plus "
+      },
+      "savedRessources" : {
+        "title" : "Ressources mises de côté"
+      },
     }
 }

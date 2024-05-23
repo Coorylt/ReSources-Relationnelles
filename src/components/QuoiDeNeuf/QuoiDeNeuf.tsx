@@ -14,7 +14,7 @@ export default function QuoiDeNeuf() {
   const {t} = useTranslation();
   
   const Ressources: Ressource[] = [
-    { id: 1, name: "Le bien être au travail", image: require('../../../public/img/cannard.webp/') },
+    { id: 1, name: "Le bien être au travail", image: require('../../../public/img/ProfessionalWorld.jpg/') },
     { id: 2, name: "Le bien être au travail", image: require('../../../public/img/cat.jpg/') },
     { id: 3, name: "Le bien être au travail", image: require('../../../public/img/dog.webp/') },
   ];

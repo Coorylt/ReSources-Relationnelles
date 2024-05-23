@@ -1,7 +1,26 @@
 import { useEffect, useState } from 'react';
-import jwtDecode from 'jwt-decode';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import getApiUrl from '../Services/getApiUrl';
+
+import { Buffer } from 'buffer';
+
+const jwtDecode = (token:any) => {
+    const [header, payload, signature] = token.split('.');
+    if (!header && !payload &&  !signature) {
+        throw new Error('Invalid token');
+    }
+    const decodeBase64 = (str: string) => Buffer.from(str, 'base64').toString('utf8');
+    return JSON.parse(decodeBase64(payload));
+};
+
+const saveUserData = async (userData:any) => {
+    try {
+        await AsyncStorage.setItem('user', JSON.stringify(userData));
+    } catch (error) {
+        console.error('Error saving user data:', error);
+        throw error;
+    }
+};
 
 const fetchRefreshToken = async (refreshToken: string) => {
     const url = getApiUrl('/token/refresh');
@@ -46,9 +65,11 @@ const useAuth = () => {
     useEffect(() => {
         const checkTokenValidity = async () => {
             try {
-                const userData = await AsyncStorage.getItem('user'); 
+                const userData = await AsyncStorage.getItem('user');
                 if (userData) {
                     const parsedUserData = JSON.parse(userData);
+                    console.log(parsedUserData.token);
+
                     setToken(parsedUserData.token);
 
                     if (parsedUserData.token.split('.').length === 3) {

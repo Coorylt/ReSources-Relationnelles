@@ -18,8 +18,13 @@ import Resources from './src/screens/Resources/Resources';
 import FindResources from './src/screens/FindResources/FindResources';
 import NewResources from './src/screens/NewResources/NewResources';
 import { Picker } from '@react-native-picker/picker';
+import ResourcesDetails from './src/screens/ResourcesDetails/ResourcesDetails';
+import { createStackNavigator } from '@react-navigation/stack';
+import RessourcePresentation from './src/components/RessourcePresentation/RessourcePresentation';
+
 
 const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator(); 
 
 if (typeof global.TextEncoder === 'undefined') {
   global.TextEncoder = TextEncoder;
@@ -38,8 +43,8 @@ interface CustomDrawerContentProps {
 
 const drawerItems: DrawerItem[] = [
   { name: "home", icon: <MaterialIcons name="home" size={34} color="white" />, screen: Home },
-  { name: "my_account", icon: <MaterialCommunityIcons name="account" size={34} color="white" />, screen: Profile },
-  { name: "message", icon: <MaterialCommunityIcons name="message-outline" size={34} color="white" />, screen: Login },
+  { name: "my_account", icon: <MaterialCommunityIcons name="account" size={34} color="white" />, screen: Login },
+  { name: "message", icon: <MaterialCommunityIcons name="message-outline" size={34} color="white" />, screen: ResourcesDetails },
   { name: "search_resources", icon: <MaterialIcons name="search" size={34} color="white" />, screen: Resources },
   { name: "new_resources", icon: <MaterialIcons name="add" size={34} color="white" />, screen: NewResources },
   { name: "Categories", icon: <MaterialCommunityIcons name="format-list-bulleted" size={34} color="white" />, screen: Category },
@@ -99,6 +104,8 @@ export default function App() {
           headerTitleStyle: { fontWeight: 'bold' },
         }}
       >
+         <Drawer.Screen name="ResourceDetails" component={ResourcesDetails} />
+         <Drawer.Screen name="Resources" component={Resources} />
         {drawerItems.map((item, index) => (
           <Drawer.Screen
             key={index}
@@ -126,12 +133,17 @@ export default function App() {
                   >
                     <Picker.Item label="FR" value="fr" />
                     <Picker.Item label="EN" value="en" />
+                    <Picker.Item label="DE" value="de" />
+                    <Picker.Item label="RU" value="ru" />
                   </Picker>
                 </View>
               ),
+              
             }}
+
           />
         ))}
+        <Drawer.Screen name="RessourcePresentation" component={RessourcePresentation} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
