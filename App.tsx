@@ -40,7 +40,7 @@ const drawerItems: DrawerItem[] = [
   { name: "home", icon: <MaterialIcons name="home" size={34} color="white" />, screen: Home },
   { name: "my_account", icon: <MaterialCommunityIcons name="account" size={34} color="white" />, screen: Profile },
   { name: "message", icon: <MaterialCommunityIcons name="message-outline" size={34} color="white" />, screen: Login },
-  { name: "search_resources", icon: <MaterialIcons name="search" size={34} color="white" />, screen: FindResources },
+  { name: "search_resources", icon: <MaterialIcons name="search" size={34} color="white" />, screen: Resources },
   { name: "new_resources", icon: <MaterialIcons name="add" size={34} color="white" />, screen: NewResources },
   { name: "Categories", icon: <MaterialCommunityIcons name="format-list-bulleted" size={34} color="white" />, screen: Category },
   { name: "about", icon: <MaterialCommunityIcons name="information-outline" size={34} color="white" />, screen: About },
