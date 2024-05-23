@@ -44,11 +44,10 @@ interface CustomDrawerContentProps {
 const drawerItems: DrawerItem[] = [
   { name: "home", icon: <MaterialIcons name="home" size={34} color="white" />, screen: Home },
   { name: "my_account", icon: <MaterialCommunityIcons name="account" size={34} color="white" />, screen: Login },
-  { name: "message", icon: <MaterialCommunityIcons name="message-outline" size={34} color="white" />, screen: ResourcesDetails },
   { name: "search_resources", icon: <MaterialIcons name="search" size={34} color="white" />, screen: Resources },
   { name: "new_resources", icon: <MaterialIcons name="add" size={34} color="white" />, screen: NewResources },
   { name: "Categories", icon: <MaterialCommunityIcons name="format-list-bulleted" size={34} color="white" />, screen: Category },
-  { name: "about", icon: <MaterialCommunityIcons name="information-outline" size={34} color="white" />, screen: About },
+  { name: "aboutNavigation", icon: <MaterialCommunityIcons name="information-outline" size={34} color="white" />, screen: About },
   { name: "faq", icon: <Ionicons name="help-circle-outline" size={34} color="white" />, screen: FAQ },
 ];
 
@@ -94,7 +93,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        initialRouteName="Accueil"
+        initialRouteName="home"
         drawerContent={props => <CustomDrawerContent {...props} />}
         screenOptions={{
           headerShown: true,
@@ -143,6 +142,7 @@ export default function App() {
 
           />
         ))}
+        <Drawer.Screen name="Home" component={Home} />
         <Drawer.Screen name="RessourcePresentation" component={RessourcePresentation} />
       </Drawer.Navigator>
     </NavigationContainer>

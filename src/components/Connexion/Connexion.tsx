@@ -9,7 +9,6 @@ import ProfilCard from '../ProfilCard/ProfilCard';
 const saveUserData = async (userData) => {
     try {
         await AsyncStorage.setItem('user', JSON.stringify(userData));
-        console.log('User data saved:', userData);
     } catch (error) {
         console.error('Error saving user data:', error);
     }
@@ -43,14 +42,10 @@ const Connexion = () => {
       const data = await apiServiceInstance.login(email, password);
       setIsLoggedIn(true);
       setError('');
-      console.log("Connexion réussie", data);
 
-      // Sauvegarder les tokens utilisateur
       await saveUserData({ token: data.token, refresh_token: data.refresh_token });
 
-      // Vérifiez si le refresh token est bien stocké
       const storedRefreshToken = await AsyncStorage.getItem('refresh_token');
-      console.log("Stored refresh token:", storedRefreshToken);
     } catch (error) {
       setError('Email ou mot de passe incorrect.');
       console.error("Erreur lors de la connexion", error);

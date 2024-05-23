@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignSelf: 'center',
-    marginTop: '10%',
+    // marginTop: '10%',
     paddingHorizontal: 20,
     width: '110%',
   },
@@ -52,12 +52,14 @@ export const styles = StyleSheet.create({
     height: 45,
     alignSelf: 'center',
     justifyContent: 'center',
+    marginBottom:20,
   },
   textButton: {
     color: 'white',
     textAlign: 'center',
     fontSize: 16,
     fontWeight: 'bold',
+    
   },
   error: {
     color: 'red',

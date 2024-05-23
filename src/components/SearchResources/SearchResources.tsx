@@ -60,10 +60,10 @@ export default function SearchResources() {
     const [showFilters, setShowFilters] = useState(false);
 
     const handleSearch = () => {
-        console.log("Search Query:", searchQuery);
-        console.log("Resource Type:", resourceType);
-        console.log("Relation Type:", relationType);
-        console.log("Category:", category);
+        // console.log("Search Query:", searchQuery);
+        // console.log("Resource Type:", resourceType);
+        // console.log("Relation Type:", relationType);
+        // console.log("Category:", category);
         // Add logic to perform search here
     };
 

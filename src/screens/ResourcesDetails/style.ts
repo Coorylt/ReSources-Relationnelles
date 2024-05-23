@@ -88,6 +88,6 @@ export const styles = StyleSheet.create({
         marginTop: 20,
     },
     button:{
-        marginRight:20,
+        width:'41%',
     }
 });

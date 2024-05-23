@@ -258,11 +258,12 @@ export default function ResourcesDetails() {
                             </View>
                         </View>
                     </View>
-                    <Button
-                        title={saved ? t('resourcesDetails.unsaveButton') : t('resourcesDetails.saveButton')}
-                        onPress={handleSave}
-                        style={styles.button}
-                    />
+                    <View style={styles.button}>
+                        <Button
+                            title={saved ? t('resourcesDetails.unsaveButton') : t('resourcesDetails.saveButton')}
+                            onPress={handleSave}
+                        />
+                    </View>
                 </View>
                 <View style={styles.body}>
                     <Text style={styles.title}>{resource.title}</Text>
